@@ -1,0 +1,257 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;1,700&display=swap");
+
+.pokeHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+h1,
+h2,
+h3 {
+  font-weight: 900;
+}
+
+.name_arrow {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.pokeHeader h1 {
+  color: white;
+  z-index: 1;
+}
+
+.card {
+  flex-direction: column;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 40px;
+  position: absolute;
+  font-family: "DM Sans", sans-serif;
+}
+
+.pokeImgSection {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  top: -30px;
+}
+
+.leftArrow {
+  height: 30px;
+}
+.nextArrow {
+  height: 30px;
+}
+
+.whiteBox {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: white;
+  border-radius: 10px;
+  padding: 95px 15px 15px 15px;
+  margin-top: -140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemonImg {
+  margin: 0px;
+  height: 420px;
+}
+
+.pokeballImg {
+  height: 370px;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  filter: opacity(0.1);
+}
+
+.types {
+  display: flex;
+  justify-content: center;
+}
+
+.types p {
+  border-radius: 20px;
+  text-align: center;
+  width: 80px;
+  margin: 10px;
+  color: white;
+}
+
+.statName {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 10px;
+  border-right: 1px solid rgba(0, 0, 0, 0.233);
+}
+.statValue {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding-left: 10px;
+}
+
+.baseStats {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding-top: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+span div {
+  padding-right: 10px;
+}
+
+.statProgress {
+  /* padding-left: 10px; */
+  width: 100%;
+}
+
+.statValue span {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.statName span {
+  font-weight: bold;
+}
+
+progress {
+  -webkit-appearance: none;
+}
+
+.Charmander::-webkit-progress-value {
+  background-color: #f57d31;
+}
+.Charmander::-webkit-progress-bar {
+  background-color: #f57c316c;
+}
+
+.Aron::-webkit-progress-value {
+  background-color: #b7b9d0;
+}
+.Aron::-webkit-progress-bar {
+  background-color: #b7b9d05c;
+}
+.Bulbasaur::-webkit-progress-value {
+  background-color: #74cb48;
+}
+.Bulbasaur::-webkit-progress-bar {
+  background-color: #74cb484a;
+}
+.Squirtle::-webkit-progress-value {
+  background-color: #6493eb;
+}
+.Squirtle::-webkit-progress-bar {
+  background-color: #6493eb4b;
+}
+.Ditto::-webkit-progress-value {
+  background-color: #aaa67f;
+}
+.Ditto::-webkit-progress-bar {
+  background-color: #aaa67f51;
+}
+.Butterfree::-webkit-progress-value {
+  background-color: #a7b723;
+}
+.Butterfree::-webkit-progress-bar {
+  background-color: #a8b72345;
+}
+.Gastly::-webkit-progress-value {
+  background-color: #70559b;
+}
+.Gastly::-webkit-progress-bar {
+  background-color: #70559b47;
+}
+.Pikachu::-webkit-progress-value {
+  background-color: #f9cf30;
+}
+.Pikachu::-webkit-progress-bar {
+  background-color: #f9cd3044;
+}
+.Mew::-webkit-progress-value {
+  background-color: #fb5584;
+}
+.Mew::-webkit-progress-bar {
+  background-color: #fb558442;
+}
+
+.about {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.height {
+  border-left: 1px solid rgba(0, 0, 0, 0.192);
+  border-right: 1px solid rgba(0, 0, 0, 0.192);
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weight {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.moves {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+}
+
+.weight div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+}
+
+.height div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 5%;
+}
+
+.about span {
+  font-size: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.moves div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 2%;
+}
+
+.movesTitle {
+  text-align: center;
+  margin: 0px;
+}

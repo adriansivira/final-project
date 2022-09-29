@@ -1,0 +1,78 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;1,700&display=swap");
+
+.App {
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 15px;
+  font-family: "DM Sans", sans-serif;
+}
+
+.container {
+  padding: 10px 40px 40px 40px;
+  background-color: rgb(224, 224, 224);
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+input {
+  width: 100%;
+  height: 40px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+header img {
+  height: 50px;
+}
+
+.order {
+  display: flex;
+  align-items: center;
+}
+
+.arrow {
+  position: absolute;
+  right: 2px;
+}
+
+.arrow p {
+  font-size: 20px;
+}
+
+input::placeholder {
+  text-align: center;
+  background-image: "./Imagenes/Recursos/lupa.png";
+}
+
+.container h1 {
+  font-size: 52px;
+  margin-left: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
