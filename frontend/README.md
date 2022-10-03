@@ -1,70 +1,289 @@
-# Getting Started with Create React App
+## ACTORES:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Pokemones -
+Usuario
 
-## Available Scripts
+## Entidades
 
-In the project directory, you can run:
+#### Pokémon
 
-### `npm start`
+```json
+{
+  "name": "Aron",
+  "id": "304",
+  "img": "/imagenes/Pokemones/aron.png",
+  "type": ["Steel", "Rock"],
+  "weight": 60.0,
+  "heigth": 0.4,
+  "moves": ["Sturdy", "Rock-Head"],
+  "description": "It eats iron ore - and sometimes railroad tracks - to build up the steel armor that projects its body.",
+  "hp": "050",
+  "atk": "070",
+  "def": "100",
+  "satk": "040",
+  "sdef": "040",
+  "spd": "030",
+  "primary_color": "#B7B9D0",
+  "secondary_color": "#B69E31"
+}
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+#### Users
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```json
+{
+  "id": 1,
+  "nombre": "Adrian Sivira",
+  "email": "adriansivira@gmail.com",
+  "pwd": "12345"
+}
+```
 
-### `npm test`
+## User
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Como usuario puedo iniciar sesión.
 
-### `npm run build`
+#### `POST: /login` Inicio de sesión
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Formato: **JSON**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Status: Si user es válido: **200 OK**. Si no hay user válido: **401 UNAUTHORIZED**.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```json
+{
+  "id": 1,
+  "nombre": "Adrian Sivira",
+  "email": "adriansivira@gmail.com",
+  "pwd": "12345"
+}
+```
 
-### `npm run eject`
+- Como usuario puedo ver todos los pokemones.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+#### `GET: /pokemones` Devolver lista de todos los pokemones.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Formato: **JSON**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Status: **200 OK**.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```json
+[
+  {
+    "name": "Aron",
+    "id": "304",
+    "img": "/imagenes/Pokemones/aron.png",
+    "primary_color": "#B7B9D0"
+  }
+]
+```
 
-## Learn More
+- Como usuario puedo ver un Pokémon en particular.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### `GET: /pokemones/{id}` Devolver un Pokémon en particular
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Formato: **JSON**
 
-### Code Splitting
+Status: **200 OK**. Si no existe **404 NOT FOUND**.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```json
+{
+  "name": "Aron",
+  "id": "304",
+  "img": "/imagenes/Pokemones/aron.png",
+  "type": ["Steel", "Rock"],
+  "weight": 60.0,
+  "heigth": 0.4,
+  "moves": ["Sturdy", "Rock-Head"],
+  "description": "It eats iron ore - and sometimes railroad tracks - to build up the steel armor that projects its body.",
+  "hp": "050",
+  "atk": "070",
+  "def": "100",
+  "satk": "040",
+  "sdef": "040",
+  "spd": "030",
+  "primary_color": "#B7B9D0",
+  "secondary_color": "#B69E31"
+}
+```
 
-### Analyzing the Bundle Size
+Status: Si no existe **404 Not Found**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```json
+{
+  "message": "No encontramos la reserva en la base"
+}
+```
 
-### Making a Progressive Web App
+### Sesion iniciada:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Como mozo quiero poder dar de alta una reserva.
 
-### Advanced Configuration
+#### `POST: /reservas` Crea una reserva.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+**Request:**
 
-### Deployment
+```json
+{
+  "nombre": "Nico",
+  "mail": "joaco@senpai.com",
+  "mozo_id": 4,
+  "fecha_de_reserva": "2022-09-01 20:00"
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Status: Si la reserva es creada **201 CREATED**
 
-### `npm run build` fails to minify
+Si la reserva tiene errores en la validacion de sus campos:
+**400 Bad Request**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Response:**
+
+```json
+{
+  "nombre": "Nico",
+  "id": 1,
+  "mail": "joaco@senpai.com",
+  "mozo_id": 4,
+  "mesa": null,
+  "confirmada": false,
+  "fecha_creada": "2022-08-31 23:00",
+  "fecha_de_reserva": "2022-09-01 20:00",
+  "fecha_de_confirmacion": null
+}
+```
+
+- Como mozo quiero poder eliminar una reserva.
+
+#### `DELETE: /reservas/{id}` Crea una reserva.
+
+```json
+{
+  "message": "Reserva borrada"
+}
+```
+
+- Como mozo quiero poder confirmar una reserva.
+
+#### `PUT: /reservas/{id}` Editar una reserva.
+
+Request Body:
+
+```json
+{
+  "nombre": "Nico",
+  "mail": "joaco@senpai.com",
+  "mozo_id": 4,
+  "confirmada": true,
+  "mesa": 4
+  "fecha_de_reserva": "2022-09-01 20:00"
+}
+```
+
+#### `PATCH: /reservas/{id}` Editar una reserva.
+
+Request Body:
+
+```json
+{
+  "confirmada": true
+}
+```
+
+## Admin / Dueño
+
+- Como dueño quiero poder ver los mozos.
+
+#### `GET: /mozos` Obtener todos los mozos.
+
+```json
+[
+  {
+    "nombre": "Juli",
+    "id": 3,
+    "apellido": "Juarez",
+    "turno": "vespertino"
+  }
+]
+```
+
+#### `GET: /mozos/{id}` Obtener un mozo.
+
+```json
+{
+  "nombre": "Juli",
+  "id": 3,
+  "apellido": "Juarez",
+  "turno": "vespertino"
+}
+```
+
+- Como dueño quiero poder registrar mozos.
+
+#### `POST: /mozos` Registrar mozo.
+
+```json
+{
+  "nombre": "Juli",
+  "apellido": "Juarez",
+  "turno": "vespertino"
+}
+```
+
+Respuesta:
+
+```json
+{
+  "nombre": "Juli",
+  "id": 3,
+  "apellido": "Juarez",
+  "turno": "vespertino"
+}
+```
+
+- Como dueño quiero poder asignar mozos a turnos.
+
+#### `PATCH: /mozos/{id}` Editar campos del mozo
+
+Request / Solicitud:
+
+```json
+{
+  "turno": "matutino"
+}
+```
+
+Response o respuesta:
+**200 OK**
+
+```json
+{
+  "nombre": "Juli",
+  "id": 3,
+  "apellido": "Juarez",
+  "turno": "matutino"
+}
+```
+
+- Como dueño quiero poder ver cuantas mesas atendio cada mozo.
+
+#### `GET: /suma-mesas`
+
+```json
+[
+  {
+    "mozo_id": 1,
+    "suma": 4,
+    "promedio_por_noche": 3
+  },
+  {
+    "mozo_id": 2,
+    "suma": 1,
+    "promedio_por_noche": 3
+  },
+  {
+    "mozo_id": 3,
+    "suma": 10,
+    "promedio_por_noche": 3
+  }
+]
+```
