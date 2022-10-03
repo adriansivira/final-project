@@ -58,6 +58,8 @@ Status: Si user es válido: **200 OK**. Si no hay user válido: **401 UNAUTHORIZ
 }
 ```
 
+## Sesión Iniciada
+
 - Como usuario puedo ver todos los pokemones.
 
 #### `GET: /pokemones` Devolver lista de todos los pokemones.
@@ -83,7 +85,7 @@ Status: **200 OK**.
 
 Formato: **JSON**
 
-Status: **200 OK**. Si no existe **404 NOT FOUND**.
+Status: **200 OK**.
 
 ```json
 {
@@ -110,24 +112,34 @@ Status: Si no existe **404 Not Found**
 
 ```json
 {
-  "message": "No encontramos la reserva en la base"
+  "message": "No existe este Pokemon"
 }
 ```
 
-### Sesion iniciada:
+- Como usuario puedo crear un Pokémon.
 
-- Como mozo quiero poder dar de alta una reserva.
-
-#### `POST: /reservas` Crea una reserva.
+#### `POST: /pokemones` Crea un Pokémon
 
 **Request:**
 
 ```json
 {
-  "nombre": "Nico",
-  "mail": "joaco@senpai.com",
-  "mozo_id": 4,
-  "fecha_de_reserva": "2022-09-01 20:00"
+  "name": "Voldemort",
+  "id": "666",
+  "img": "/imagenes/Pokemones/voldemort.png",
+  "type": ["Serpiente", "Híbrido"],
+  "weight": 60.0,
+  "heigth": 0.4,
+  "moves": ["Avakedabra", "Kill people"],
+  "description": "This man es una verga. Be careful with him",
+  "hp": "050",
+  "atk": "070",
+  "def": "100",
+  "satk": "040",
+  "sdef": "040",
+  "spd": "030",
+  "primary_color": "#B7B9D0",
+  "secondary_color": "#B69E31"
 }
 ```
 
@@ -140,150 +152,31 @@ Si la reserva tiene errores en la validacion de sus campos:
 
 ```json
 {
-  "nombre": "Nico",
-  "id": 1,
-  "mail": "joaco@senpai.com",
-  "mozo_id": 4,
-  "mesa": null,
-  "confirmada": false,
-  "fecha_creada": "2022-08-31 23:00",
-  "fecha_de_reserva": "2022-09-01 20:00",
-  "fecha_de_confirmacion": null
+  "name": "Voldemort",
+  "id": "666",
+  "img": "/imagenes/Pokemones/voldemort.png",
+  "type": ["Serpiente", "Híbrido"],
+  "weight": 60.0,
+  "heigth": 0.4,
+  "moves": ["Avakedabra", "Kill people"],
+  "description": "This man es una verga. Be careful with him",
+  "hp": "050",
+  "atk": "070",
+  "def": "100",
+  "satk": "040",
+  "sdef": "040",
+  "spd": "030",
+  "primary_color": "#B7B9D0",
+  "secondary_color": "#B69E31"
 }
 ```
 
-- Como mozo quiero poder eliminar una reserva.
+- Como usuario puedo eliminar un Pokemon
 
-#### `DELETE: /reservas/{id}` Crea una reserva.
+#### `DELETE: /pokemones/{id}` Crea una reserva.
 
 ```json
 {
   "message": "Reserva borrada"
 }
-```
-
-- Como mozo quiero poder confirmar una reserva.
-
-#### `PUT: /reservas/{id}` Editar una reserva.
-
-Request Body:
-
-```json
-{
-  "nombre": "Nico",
-  "mail": "joaco@senpai.com",
-  "mozo_id": 4,
-  "confirmada": true,
-  "mesa": 4
-  "fecha_de_reserva": "2022-09-01 20:00"
-}
-```
-
-#### `PATCH: /reservas/{id}` Editar una reserva.
-
-Request Body:
-
-```json
-{
-  "confirmada": true
-}
-```
-
-## Admin / Dueño
-
-- Como dueño quiero poder ver los mozos.
-
-#### `GET: /mozos` Obtener todos los mozos.
-
-```json
-[
-  {
-    "nombre": "Juli",
-    "id": 3,
-    "apellido": "Juarez",
-    "turno": "vespertino"
-  }
-]
-```
-
-#### `GET: /mozos/{id}` Obtener un mozo.
-
-```json
-{
-  "nombre": "Juli",
-  "id": 3,
-  "apellido": "Juarez",
-  "turno": "vespertino"
-}
-```
-
-- Como dueño quiero poder registrar mozos.
-
-#### `POST: /mozos` Registrar mozo.
-
-```json
-{
-  "nombre": "Juli",
-  "apellido": "Juarez",
-  "turno": "vespertino"
-}
-```
-
-Respuesta:
-
-```json
-{
-  "nombre": "Juli",
-  "id": 3,
-  "apellido": "Juarez",
-  "turno": "vespertino"
-}
-```
-
-- Como dueño quiero poder asignar mozos a turnos.
-
-#### `PATCH: /mozos/{id}` Editar campos del mozo
-
-Request / Solicitud:
-
-```json
-{
-  "turno": "matutino"
-}
-```
-
-Response o respuesta:
-**200 OK**
-
-```json
-{
-  "nombre": "Juli",
-  "id": 3,
-  "apellido": "Juarez",
-  "turno": "matutino"
-}
-```
-
-- Como dueño quiero poder ver cuantas mesas atendio cada mozo.
-
-#### `GET: /suma-mesas`
-
-```json
-[
-  {
-    "mozo_id": 1,
-    "suma": 4,
-    "promedio_por_noche": 3
-  },
-  {
-    "mozo_id": 2,
-    "suma": 1,
-    "promedio_por_noche": 3
-  },
-  {
-    "mozo_id": 3,
-    "suma": 10,
-    "promedio_por_noche": 3
-  }
-]
 ```
