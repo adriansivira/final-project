@@ -171,7 +171,7 @@ Si la reserva tiene errores en la validacion de sus campos:
 }
 ```
 
-- Como usuario puedo eliminar un Pokemon
+- Como usuario puedo eliminar un Pokemon.
 
 #### `DELETE: /pokemones/{id}` Crea una reserva.
 
