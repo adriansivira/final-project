@@ -177,6 +177,6 @@ Si la reserva tiene errores en la validacion de sus campos:
 
 ```json
 {
-  "message": "Reserva borrada"
+  "message": "Pokemon borrado"
 }
 ```
