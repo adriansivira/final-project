@@ -131,7 +131,7 @@ Status: Si no existe **404 Not Found**
   "weight": 60.0,
   "heigth": 0.4,
   "moves": ["Avakedabra", "Kill people"],
-  "description": "This man es una verga. Be careful with him",
+  "description": "This man is dangerous. Be careful with him",
   "hp": "050",
   "atk": "070",
   "def": "100",
@@ -159,7 +159,7 @@ Si la reserva tiene errores en la validacion de sus campos:
   "weight": 60.0,
   "heigth": 0.4,
   "moves": ["Avakedabra", "Kill people"],
-  "description": "This man es una verga. Be careful with him",
+  "description": "This man is dangerous. Be careful with him",
   "hp": "050",
   "atk": "070",
   "def": "100",
@@ -171,7 +171,7 @@ Si la reserva tiene errores en la validacion de sus campos:
 }
 ```
 
-- Como usuario puedo eliminar un Pokemon
+- Como usuario puedo eliminar un Pokemon.
 
 #### `DELETE: /pokemones/{id}` Crea una reserva.
 
