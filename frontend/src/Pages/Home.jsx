@@ -8,10 +8,18 @@ export const Home = () => {
   const [order, setOrder] = useState(true);
   const [orderArrow, setorderArrow] = useState(true);
   const [chosenList, setChosenList] = useState(data);
-  const [filter, setFilter] = useState(data);
 
   let search; //Variable que captura el texto del input
   let filteredList; //Variable que devuelve la lista según la búsqueda
+
+  const sortingAlphaListMayor = (a, b) => {
+    if (a.img > b.img) {
+      return 1;
+    }
+    if (a.img < b.img) {
+      return -1;
+    }
+  };
 
   useEffect(() => {
     fetch("http://localhost:8000/pokemones", {
@@ -23,36 +31,27 @@ export const Home = () => {
     })
       .then((r) => r.json())
       .then((response) => {
-        setData(response);
-        console.log(response);
+        setData([...response].sort(sortingAlphaListMayor));
+        setChosenList([...response].sort(sortingAlphaListMayor));
       })
       .catch((err) => alert(err));
+  }, []);
 
+  useEffect(() => {
     if (order && orderArrow) {
-      const sortingAlphaListMayor = (a, b) => {
-        if (a.nombre > b.nombre) {
-          return 1;
-        }
-        if (a.nombre < b.nombre) {
-          return -1;
-        }
-      };
-
-      setChosenList([...chosenList].sort(sortingAlphaListMayor));
-      setFilter([...filter].sort(sortingAlphaListMayor));
+      setChosenList([...data].sort(sortingAlphaListMayor));
     }
     if (order && !orderArrow) {
       const sortingAlphaListMinor = (a, b) => {
-        if (a.nombre < b.nombre) {
+        if (a.img < b.img) {
           return 1;
         }
-        if (a.nombre > b.nombre) {
+        if (a.img > b.img) {
           return -1;
         }
       };
 
-      setChosenList([...chosenList].sort(sortingAlphaListMinor));
-      setFilter([...filter].sort(sortingAlphaListMinor));
+      setChosenList([...data].sort(sortingAlphaListMinor));
     }
     if (!order && orderArrow) {
       const sortingNumListMayor = (a, b) => {
@@ -64,8 +63,7 @@ export const Home = () => {
         }
       };
 
-      setChosenList([...chosenList].sort(sortingNumListMayor));
-      setFilter([...filter].sort(sortingNumListMayor));
+      setChosenList([...data].sort(sortingNumListMayor));
     }
     if (!order && !orderArrow) {
       const sortingNumListMinor = (a, b) => {
@@ -77,18 +75,18 @@ export const Home = () => {
         }
       };
 
-      setChosenList([...chosenList].sort(sortingNumListMinor));
-      setFilter([...filter].sort(sortingNumListMinor));
+      setChosenList([...data].sort(sortingNumListMinor));
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [order, orderArrow]);
 
   const handleSearch = (e) => {
     search = e.target.value;
-    filteredList = chosenList.filter((poke) => {
-      return poke.nombre.match(search);
+    filteredList = data.filter((poke) => {
+      return poke.img.match(search);
     });
     if (search.length === 0) {
-      setChosenList(filter);
+      setChosenList(data);
     } else {
       setChosenList([...filteredList]);
     }
@@ -105,7 +103,7 @@ export const Home = () => {
   return (
     <div className="container">
       <header>
-        <img src="./Imagenes/Recursos/Pokeball.png" />
+        <img alt="Hola" src="./Imagenes/Recursos/Pokeball.png" />
         <h1>Pokédex</h1>
         <section className="order arrow">
           {order ? (
@@ -115,11 +113,13 @@ export const Home = () => {
           )}
           {orderArrow ? (
             <img
+              alt="Hola"
               onClick={handleArrowOrder}
               src="./Imagenes/Recursos/down-arrow.png"
             />
           ) : (
             <img
+              alt="Hola"
               onClick={handleArrowOrder}
               src="./Imagenes/Recursos/up-arrow.png"
             />
@@ -128,15 +128,14 @@ export const Home = () => {
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
       <div className="App">
-        {/* {chosenList.map((poke) => (
+        {chosenList.map((poke) => (
           <PokemonBox
             nombre={poke.nombre}
             id={poke.id}
             img={poke.img}
             color_primario={poke.color_primario}
           />
-        ))} */}
-        <p>{data.nombre}</p>
+        ))}
       </div>
     </div>
   );
