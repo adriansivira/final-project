@@ -2,8 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { Card } from "./Components/Cards/Card";
 import { pokemonList } from "./Database/Pokemon";
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
+import { Home } from "../src/Pages/Home";
+import { Login } from "../src/Pages/Login";
 
 function App() {
   return (
@@ -11,9 +11,9 @@ function App() {
       <div>
         <Routes>
           <Route path="/" element={<Login />}></Route>
-          <Route path="/Home" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}></Route>
           <Route
-            path={"/card/:name"}
+            path={"/card/:nombre"}
             element={<Card pokemonList={pokemonList} />}
           ></Route>
         </Routes>

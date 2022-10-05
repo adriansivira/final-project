@@ -3,7 +3,7 @@ import "./Card.css";
 import { ProgressBar } from "./ProgressBar";
 
 export const Card = ({ pokemonList }) => {
-  const { name } = useParams();
+  const { nombre } = useParams();
   const navigate = useNavigate();
 
   // Después probar con UseState
@@ -13,7 +13,7 @@ export const Card = ({ pokemonList }) => {
   let newPokemon;
 
   pokemonList.map((poke, i) => {
-    if (poke.name === name) {
+    if (poke.nombre === nombre) {
       newPokemon = poke;
       index = i;
     }
@@ -21,7 +21,7 @@ export const Card = ({ pokemonList }) => {
 
   return (
     <div
-      style={{ backgroundColor: `${newPokemon.primary_color}` }}
+      style={{ backgroundColor: `${newPokemon.color_primario}` }}
       className="card"
     >
       {/* PROFILE HEADER */}
@@ -31,7 +31,7 @@ export const Card = ({ pokemonList }) => {
             onClick={() => navigate("/")}
             src="/Imagenes/Recursos/arrow_back.png"
           />
-          <h1>{newPokemon.name}</h1>
+          <h1>{newPokemon.nombre}</h1>
         </div>
         <h1>#{newPokemon.id}</h1>
       </div>
@@ -42,8 +42,8 @@ export const Card = ({ pokemonList }) => {
         <Link
           to={`/card/${
             pokemonList[index - 1]
-              ? pokemonList[index - 1].name
-              : pokemonList[pokemonList.length - 1].name
+              ? pokemonList[index - 1].nombre
+              : pokemonList[pokemonList.length - 1].nombre
           } `}
         >
           <img className="leftArrow" src="/Imagenes/Recursos/back.png" alt="" />
@@ -54,8 +54,8 @@ export const Card = ({ pokemonList }) => {
         <Link
           to={`/card/${
             pokemonList[index + 1]
-              ? pokemonList[index + 1].name
-              : pokemonList[0].name
+              ? pokemonList[index + 1].nombre
+              : pokemonList[0].nombre
           } `}
         >
           <img className="nextArrow" src="/Imagenes/Recursos/next.png" alt="" />
@@ -69,8 +69,8 @@ export const Card = ({ pokemonList }) => {
             <p
               style={
                 i === 0
-                  ? { backgroundColor: `${newPokemon.primary_color}` }
-                  : { backgroundColor: `${newPokemon.secondary_color}` }
+                  ? { backgroundColor: `${newPokemon.color_primario}` }
+                  : { backgroundColor: `${newPokemon.color_secundario}` }
               }
             >
               {ty}
@@ -80,7 +80,7 @@ export const Card = ({ pokemonList }) => {
         {/* ABOUT SECTION */}
         <h2
           className="aboutTitle"
-          style={{ color: `${newPokemon.primary_color}` }}
+          style={{ color: `${newPokemon.color_primario}` }}
         >
           About
         </h2>
@@ -109,46 +109,46 @@ export const Card = ({ pokemonList }) => {
         </section>
         <p>{newPokemon.description}</p>
         {/* STATS SECTION */}
-        <h2 style={{ color: `${newPokemon.primary_color}` }}>Base Stats</h2>
+        <h2 style={{ color: `${newPokemon.color_primario}` }}>Base Stats</h2>
         <section className="baseStats">
           <div className="statName">
-            <span style={{ color: `${newPokemon.primary_color}` }}>HP</span>
-            <span style={{ color: `${newPokemon.primary_color}` }}>ATK</span>
-            <span style={{ color: `${newPokemon.primary_color}` }}>DEF</span>
-            <span style={{ color: `${newPokemon.primary_color}` }}>SATK</span>
-            <span style={{ color: `${newPokemon.primary_color}` }}>SDEF</span>
-            <span style={{ color: `${newPokemon.primary_color}` }}>SPD</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>HP</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>ATK</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>DEF</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>SATK</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>SDEF</span>
+            <span style={{ color: `${newPokemon.color_primario}` }}>SPD</span>
           </div>
           <div className="statValue">
             <ProgressBar
               text={newPokemon.hp}
               value={newPokemon.hp}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
             <ProgressBar
               text={newPokemon.atk}
               value={newPokemon.atk}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
             <ProgressBar
               text={newPokemon.def}
               value={newPokemon.def}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
             <ProgressBar
               text={newPokemon.satk}
               value={newPokemon.satk}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
             <ProgressBar
               text={newPokemon.sdef}
               value={newPokemon.sdef}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
             <ProgressBar
               text={newPokemon.spd}
               value={newPokemon.spd}
-              className={`statProgress ${newPokemon.name} `}
+              className={`statProgress ${newPokemon.nombre} `}
             />
           </div>
         </section>
