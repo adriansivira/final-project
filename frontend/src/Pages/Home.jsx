@@ -1,23 +1,32 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import { PokemonBox } from "../Components/Box/PokemonBox";
-import { pokemonList } from "../Database/Pokemon";
+// import { pokemonList } from "../Database/Pokemon";
 
 export const Home = () => {
+  const [data, setData] = useState([]);
   const [order, setOrder] = useState(true);
   const [orderArrow, setorderArrow] = useState(true);
-  const [chosenList, setChosenList] = useState(pokemonList);
-  const [filter, setFilter] = useState(pokemonList);
-  const [data, setData] = useState([]);
+  const [chosenList, setChosenList] = useState(data);
+  const [filter, setFilter] = useState(data);
 
   let search; //Variable que captura el texto del input
   let filteredList; //Variable que devuelve la lista según la búsqueda
 
   useEffect(() => {
-    fetch(`http://localhost:3000/pokemones`)
+    fetch("http://localhost:8000/pokemones", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        accept: "application/json",
+      },
+    })
       .then((r) => r.json())
-      .then((response) => setData(response))
-      .catch((error) => ("error", error));
+      .then((response) => {
+        setData(response);
+        console.log(response);
+      })
+      .catch((err) => alert(err));
 
     if (order && orderArrow) {
       const sortingAlphaListMayor = (a, b) => {
@@ -119,14 +128,15 @@ export const Home = () => {
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
       <div className="App">
-        {chosenList.map((poke) => (
+        {/* {chosenList.map((poke) => (
           <PokemonBox
-            name={poke.nombre}
+            nombre={poke.nombre}
             id={poke.id}
             img={poke.img}
-            primary_color={poke.primary_color}
+            color_primario={poke.color_primario}
           />
-        ))}
+        ))} */}
+        <p>{data.nombre}</p>
       </div>
     </div>
   );
