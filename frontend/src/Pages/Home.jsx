@@ -13,6 +13,11 @@ export const Home = () => {
   let filteredList; //Variable que devuelve la lista según la búsqueda
 
   useEffect(() => {
+    fetch(`http://localhost:3000/pokemones`)
+      .then((r) => r.json())
+      .then((r) => r.json())
+      .catch((error) => ("error", error));
+
     if (order && orderArrow) {
       const sortingAlphaListMayor = (a, b) => {
         if (a.name > b.name) {
