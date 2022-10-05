@@ -8,6 +8,7 @@ export const Home = () => {
   const [orderArrow, setorderArrow] = useState(true);
   const [chosenList, setChosenList] = useState(pokemonList);
   const [filter, setFilter] = useState(pokemonList);
+  const [data, setData] = useState([]);
 
   let search; //Variable que captura el texto del input
   let filteredList; //Variable que devuelve la lista según la búsqueda
@@ -15,15 +16,15 @@ export const Home = () => {
   useEffect(() => {
     fetch(`http://localhost:3000/pokemones`)
       .then((r) => r.json())
-      .then((r) => r.json())
+      .then((response) => setData(response))
       .catch((error) => ("error", error));
 
     if (order && orderArrow) {
       const sortingAlphaListMayor = (a, b) => {
-        if (a.name > b.name) {
+        if (a.nombre > b.nombre) {
           return 1;
         }
-        if (a.name < b.name) {
+        if (a.nombre < b.nombre) {
           return -1;
         }
       };
@@ -33,10 +34,10 @@ export const Home = () => {
     }
     if (order && !orderArrow) {
       const sortingAlphaListMinor = (a, b) => {
-        if (a.name < b.name) {
+        if (a.nombre < b.nombre) {
           return 1;
         }
-        if (a.name > b.name) {
+        if (a.nombre > b.nombre) {
           return -1;
         }
       };
@@ -75,7 +76,7 @@ export const Home = () => {
   const handleSearch = (e) => {
     search = e.target.value;
     filteredList = chosenList.filter((poke) => {
-      return poke.name.match(search);
+      return poke.nombre.match(search);
     });
     if (search.length === 0) {
       setChosenList(filter);
@@ -120,7 +121,7 @@ export const Home = () => {
       <div className="App">
         {chosenList.map((poke) => (
           <PokemonBox
-            name={poke.name}
+            name={poke.nombre}
             id={poke.id}
             img={poke.img}
             primary_color={poke.primary_color}
