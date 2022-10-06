@@ -5,6 +5,7 @@ const pokeController = require("./controllers/pokemones");
 const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const router = require("./controllers/users");
 
 app.use(bodyParser.json());
 
@@ -27,6 +28,7 @@ app.use(cors(corsOptions));
 // ENDPOINTS
 
 app.get("/pokemones", pokeController.todospokemones);
+app.use("/user", router);
 
 app.listen(8000, () => {
   console.log("Escuchando en el puerto 8000");
