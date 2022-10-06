@@ -18,3 +18,17 @@ exports.todospokemones = (req, res, next) => {
       next();
     });
 };
+
+exports.pokemoncard = (req, res, next) => {
+  knex
+    .select("*")
+    .from("pokemones")
+    .then((result) => {
+      res.json(result);
+      next();
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "error" });
+      next();
+    });
+};

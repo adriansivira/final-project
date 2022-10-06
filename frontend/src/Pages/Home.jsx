@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import "../App.css";
 import { PokemonBox } from "../Components/Box/PokemonBox";
+import { SpinnerDotted } from "spinners-react";
 // import { pokemonList } from "../Database/Pokemon";
 
 export const Home = () => {
@@ -8,6 +9,7 @@ export const Home = () => {
   const [order, setOrder] = useState(true);
   const [orderArrow, setorderArrow] = useState(true);
   const [chosenList, setChosenList] = useState(data);
+  const [loading, setLoading] = useState(false);
 
   let search; //Variable que captura el texto del input
   let filteredList; //Variable que devuelve la lista según la búsqueda
@@ -33,6 +35,9 @@ export const Home = () => {
       .then((response) => {
         setData([...response].sort(sortingAlphaListMayor));
         setChosenList([...response].sort(sortingAlphaListMayor));
+        setTimeout(() => {
+          setLoading(true);
+        }, 1000);
       })
       .catch((err) => alert(err));
   }, []);
@@ -128,14 +133,20 @@ export const Home = () => {
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
       <div className="App">
-        {chosenList.map((poke) => (
-          <PokemonBox
-            nombre={poke.nombre}
-            id={poke.id}
-            img={poke.img}
-            color_primario={poke.color_primario}
-          />
-        ))}
+        {loading === true ? (
+          chosenList.map((poke) => (
+            <PokemonBox
+              nombre={poke.nombre}
+              id={poke.id}
+              img={poke.img}
+              color_primario={poke.color_primario}
+            />
+          ))
+        ) : (
+          <div>
+            <SpinnerDotted />
+          </div>
+        )}
       </div>
     </div>
   );
