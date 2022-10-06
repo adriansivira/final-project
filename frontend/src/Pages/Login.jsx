@@ -8,32 +8,6 @@ export function Login() {
   const navigate = useNavigate();
 
   const login = (name, email, password) => {
-    // fetch("http://localhost:8000/user/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     accept: "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     nombre: name,
-    //     email: email,
-    //     pwd: password,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((response) => {
-    //     if (response.success) {
-    //       localStorage.setItem("auth-token", response.auth_token);
-    //       navigate("/home");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //     alert(err);
-    //   });
-
     let myHeaders = new Headers();
     myHeaders.append("auth-token", "");
     myHeaders.append("Content-Type", "application/json");
