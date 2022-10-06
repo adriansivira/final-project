@@ -8,24 +8,61 @@ export function Login() {
   const navigate = useNavigate();
 
   const login = (name, email, password) => {
-    fetch(`http://localhost:8000/login`, {
+    // fetch("http://localhost:8000/user/login", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     accept: "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     nombre: name,
+    //     email: email,
+    //     pwd: password,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((response) => {
+    //     if (response.success) {
+    //       localStorage.setItem("auth-token", response.auth_token);
+    //       navigate("/home");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     console.log(err);
+    //     alert(err);
+    //   });
+
+    let myHeaders = new Headers();
+    myHeaders.append("auth-token", "");
+    myHeaders.append("Content-Type", "application/json");
+
+    const raw = JSON.stringify({
+      nombre: name,
+      email: email,
+      pwd: password,
+    });
+
+    const requestOptions = {
       method: "POST",
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    })
-      .then(function (response) {
-        if (response.success) {
-          localStorage.setItem("auth-token", response.auth_token);
-          navigate("/");
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:8000/user/login", requestOptions)
+      .then((response) => response.text())
+      .then((result) => {
+        if (result.success) {
+          localStorage.setItem("auth-token", result.auth_token);
         }
+        console.log(result);
+        debugger;
+        navigate("/home");
+        debugger;
       })
-      .catch((err) => {
-        console.log(err);
-        alert(err);
-      });
+      .catch((error) => console.log("error", error));
   };
 
   return (
