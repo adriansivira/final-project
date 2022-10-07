@@ -20,9 +20,12 @@ exports.todospokemones = (req, res, next) => {
 };
 
 exports.pokemoncard = (req, res, next) => {
+  const id = req.id;
   knex
+    .where("id", id)
     .select("*")
     .from("pokemones")
+
     .then((result) => {
       res.json(result);
       next();
