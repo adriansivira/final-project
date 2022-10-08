@@ -22,7 +22,7 @@ exports.todospokemones = (req, res, next) => {
 exports.pokemoncard = (req, res, next) => {
   const nombre = req.params.nombre;
   knex
-    .where("nombre", nombre)
+    // .where("nombre", nombre)
     .select("*")
     .from("pokemonlist")
 

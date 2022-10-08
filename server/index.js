@@ -28,7 +28,7 @@ app.use(cors(corsOptions));
 // ENDPOINTS
 
 app.get("/pokemones", pokeController.todospokemones);
-app.get("/pokemones/:nombre", pokeController.pokemoncard);
+app.get("/pokemoncard", pokeController.pokemoncard);
 app.use("/user", router);
 
 app.listen(8000, () => {
