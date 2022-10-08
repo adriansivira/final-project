@@ -12,8 +12,7 @@ export const Card = () => {
   // Hacer usestate para capturar los datos desde el fetch
 
   useEffect(() => {
-    console.log("Hola");
-    fetch("http://localhost:8000/pokemones/" + nombre, {
+    fetch("http://localhost:8000/pokemoncard/", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
