@@ -15,10 +15,10 @@ export const Home = () => {
   let filteredList; //Variable que devuelve la lista según la búsqueda
 
   const sortingAlphaListMayor = (a, b) => {
-    if (a.img > b.img) {
+    if (a.nombre > b.nombre) {
       return 1;
     }
-    if (a.img < b.img) {
+    if (a.nombre < b.nombre) {
       return -1;
     }
   };
@@ -26,6 +26,7 @@ export const Home = () => {
   useEffect(() => {
     fetch("http://localhost:8000/pokemones", {
       method: "GET",
+      redirect: "follow",
       headers: {
         "Content-Type": "application/json",
         accept: "application/json",
@@ -48,10 +49,10 @@ export const Home = () => {
     }
     if (order && !orderArrow) {
       const sortingAlphaListMinor = (a, b) => {
-        if (a.img < b.img) {
+        if (a.nombre < b.nombre) {
           return 1;
         }
-        if (a.img > b.img) {
+        if (a.nombre > b.nombre) {
           return -1;
         }
       };
@@ -88,7 +89,7 @@ export const Home = () => {
   const handleSearch = (e) => {
     search = e.target.value;
     filteredList = data.filter((poke) => {
-      return poke.img.match(search);
+      return poke.nombre.match(search);
     });
     if (search.length === 0) {
       setChosenList(data);

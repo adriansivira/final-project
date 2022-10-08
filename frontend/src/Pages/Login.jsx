@@ -72,7 +72,10 @@ export function Login() {
         </div>
         <button
           className="loginButton"
-          onClick={(e) => login(name, email, password)}
+          onClick={(e) => {
+            e.preventDefault();
+            login(name, email, password);
+          }}
         >
           Log in
         </button>

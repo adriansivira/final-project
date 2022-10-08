@@ -1,18 +1,32 @@
+import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Card.css";
 import { ProgressBar } from "./ProgressBar";
 
-export const Card = ({ pokemonList }) => {
+export const Card = () => {
   const { nombre } = useParams();
   const navigate = useNavigate();
+  const [datacard, setDatacard] = useState([]);
+  // Hacer usestate para capturar los datos desde el fetch
 
-  // Después probar con UseState
+  fetch("http://localhost:8000/pokemones/" + nombre, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      accept: "application/json",
+    },
+  })
+    .then((response) => response.json())
+    .then((result) => {
+      setDatacard(result);
+    })
+    .catch((error) => console.log("error", error));
 
   let index;
 
   let newPokemon;
 
-  pokemonList.map((poke, i) => {
+  datacard.map((poke, i) => {
     if (poke.nombre === nombre) {
       newPokemon = poke;
       index = i;
@@ -28,7 +42,7 @@ export const Card = ({ pokemonList }) => {
       <div className="pokeHeader">
         <div className="name_arrow">
           <img
-            onClick={() => navigate("/")}
+            onClick={() => navigate("/home")}
             src="/Imagenes/Recursos/arrow_back.png"
           />
           <h1>{newPokemon.nombre}</h1>
@@ -41,9 +55,9 @@ export const Card = ({ pokemonList }) => {
         {/* LEFT ARROW */}
         <Link
           to={`/card/${
-            pokemonList[index - 1]
-              ? pokemonList[index - 1].nombre
-              : pokemonList[pokemonList.length - 1].nombre
+            datacard[index - 1]
+              ? datacard[index - 1].nombre
+              : datacard[datacard.length - 1].nombre
           } `}
         >
           <img className="leftArrow" src="/Imagenes/Recursos/back.png" alt="" />
@@ -53,9 +67,9 @@ export const Card = ({ pokemonList }) => {
         {/* RIGTH ARROW */}
         <Link
           to={`/card/${
-            pokemonList[index + 1]
-              ? pokemonList[index + 1].nombre
-              : pokemonList[0].nombre
+            datacard[index + 1]
+              ? datacard[index + 1].nombre
+              : datacard[0].nombre
           } `}
         >
           <img className="nextArrow" src="/Imagenes/Recursos/next.png" alt="" />
