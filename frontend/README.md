@@ -81,7 +81,7 @@ Status: **200 OK**.
 
 - Como usuario puedo ver un Pokémon en particular.
 
-#### `GET: /pokemones/{id}` Devolver un Pokémon en particular
+#### `GET: /pokemones/{nombre}` Devolver un Pokémon en particular
 
 Formato: **JSON**
 

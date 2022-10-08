@@ -12,7 +12,7 @@ const knex = require("knex")({
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemones")
+    .from("pokemonlist")
     .then((result) => {
       res.json(result);
       next();
@@ -20,11 +20,11 @@ exports.todospokemones = (req, res, next) => {
 };
 
 exports.pokemoncard = (req, res, next) => {
-  const id = req.id;
+  const nombre = req.params.nombre;
   knex
-    .where("id", id)
+    .where("nombre", nombre)
     .select("*")
-    .from("pokemones")
+    .from("pokemonlist")
 
     .then((result) => {
       res.json(result);
