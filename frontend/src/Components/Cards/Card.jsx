@@ -8,6 +8,7 @@ export const Card = () => {
   const { nombre } = useParams();
   const navigate = useNavigate();
   const [datacard, setDatacard] = useState([]);
+  const [isloading, setisLoading] = useState(false);
 
   // Hacer usestate para capturar los datos desde el fetch
 
@@ -21,8 +22,10 @@ export const Card = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
         setDatacard(result);
+        setTimeout(() => {
+          setisLoading(true);
+        }, 1000);
       })
       .catch((error) => console.log("error", error));
   }, []);
