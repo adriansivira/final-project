@@ -34,8 +34,6 @@ export const Card = () => {
 
   let newPokemon;
 
-  // BORRAR ESTA MIERDA DE MAP QUE NO SIRVE PARA UN COÑO
-
   datacard.map((poke, i) => {
     if (poke.nombre === nombre) {
       newPokemon = poke;
