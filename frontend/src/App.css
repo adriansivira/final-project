@@ -76,3 +76,16 @@ input::placeholder {
   margin-top: 0px;
   margin-bottom: 0px;
 }
+
+/* POKEMON BOX ADD /
+
+.boxImage img {
+  box-sizing: border-box;
+  height: 50px;
+}
+/ LOGIN */
+
+.login {
+  align-items: center;
+  margin: 0 auto;
+}

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import { PokemonBox } from "../Components/Box/PokemonBox";
 import { SpinnerDotted } from "spinners-react";
-// import { pokemonList } from "../Database/Pokemon";
+import { PokemonBoxAdd } from "../Components/Box/PokemonBoxAdd";
+import { Link, Outlet } from "react-router-dom";
 
 export const Home = () => {
   const [data, setData] = useState([]);
@@ -108,6 +109,7 @@ export const Home = () => {
 
   return (
     <div className="container">
+      <Outlet />
       <header>
         <img alt="Hola" src="./Imagenes/Recursos/Pokeball.png" />
         <h1>Pokédex</h1>
@@ -134,6 +136,10 @@ export const Home = () => {
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
       <div className="App">
+        <Link to="createPokemon">
+          <PokemonBoxAdd />
+        </Link>
+
         {loading === true ? (
           chosenList.map((poke) => (
             <PokemonBox

@@ -3,6 +3,7 @@ import "./App.css";
 import { Card } from "./Components/Cards/Card";
 import { Home } from "../src/Pages/Home";
 import { Login } from "../src/Pages/Login";
+import { CreatePokemon } from "../src/Pages/CreatePokemon";
 
 function App() {
   return (
@@ -10,7 +11,10 @@ function App() {
       <div>
         <Routes>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/home" element={<Home />}></Route>
+          <Route path="/home" element={<Home />}>
+            <Route path="createPokemon" element={<CreatePokemon />}></Route>
+          </Route>
+
           <Route path={"/card/:nombre"} element={<Card />}></Route>
         </Routes>
       </div>
