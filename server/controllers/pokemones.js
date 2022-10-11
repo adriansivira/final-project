@@ -4,15 +4,15 @@ const knex = require("knex")({
     host: "localhost",
     port: 5432,
     user: "postgres",
-    password: "admin12345",
-    database: "pokemonesfinal",
+    password: "Admin2022",
+    database: "FinalProject",
   },
 });
 
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemonlist")
+    .from("pokemones")
     .then((result) => {
       res.json(result);
       next();
@@ -24,7 +24,7 @@ exports.pokemoncard = (req, res, next) => {
   knex
     // .where("nombre", nombre)
     .select("*")
-    .from("pokemonlist")
+    .from("pokemones")
 
     .then((result) => {
       res.json(result);
