@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 export function CreatePokemon() {
@@ -7,14 +7,10 @@ export function CreatePokemon() {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
-  const [type1, setType1] = useState("");
-  const [type2, setType2] = useState("");
-  const [type, setType] = useState(["", ""]);
+  const [type, setType] = useState([]);
   const [weight, setWeight] = useState("");
   const [height, setHeight] = useState("");
-  const [move1, setMove1] = useState("");
-  const [move2, setMove2] = useState("");
-  const [moves, setMoves] = useState(["", ""]);
+  const [moves, setMoves] = useState([]);
   const [description, setDescription] = useState("");
   const [hp, setHp] = useState("");
   const [atk, setAtk] = useState("");
@@ -25,14 +21,53 @@ export function CreatePokemon() {
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
 
-  const fetchForm = () => {
+  let type1;
+  let type2;
+  let move1;
+  let move2;
+
+  const fetchForm = (
+    id,
+    img,
+    nombre,
+    tipo,
+    weight,
+    height,
+    moves,
+    description,
+    hp,
+    atk,
+    def,
+    satk,
+    sdef,
+    spd,
+    color_primario,
+    color_secundario
+  ) => {
     fetch(`http://localhost:8000/pokemones`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
       },
-      body: JSON.stringify({}),
+      body: JSON.stringify({
+        id: id,
+        img: img,
+        nombre: nombre,
+        tipo: tipo,
+        weight: weight,
+        height: height,
+        moves: moves,
+        description: description,
+        hp: hp,
+        atk: atk,
+        def: def,
+        satk: satk,
+        sdef: sdef,
+        spd: spd,
+        color_primario: color_primario,
+        color_secundario: color_secundario,
+      }),
     })
       .then((r) => {
         return r.json();
@@ -48,35 +83,24 @@ export function CreatePokemon() {
       });
   };
 
-  const backgroundColor = [
-    { name: "Rock", color: "#B69E31" },
-    { name: "Ghost", color: "#70559B" },
-    { name: "Steel", color: "#B7B9D0" },
-    { name: "Water", color: "#6493EB" },
-    { name: "Grass", color: "#74CB48" },
-    { name: "Psychic", color: "#FB5584" },
-    { name: "Normal", color: "#AAA67F" },
-    { name: "Flying", color: "#A891EC" },
-    { name: "Poison", color: "#A43E9E" },
-    { name: "Bug", color: "#A7B723" },
-    { name: "Fire", color: "#F57D31" },
-    { name: "Electric", color: "#F9CF30" },
-  ];
-
   const setTypeAndColor1 = (e) => {
-    let type = e.target.value;
-    setType1(type);
-    let colorType = backgroundColor.find((item) => item.name === type);
-    setPrimaryColor(colorType.color);
-    setType([type1, type2]);
+    type1 = e.target.value;
+    setType(type1);
   };
 
   const setTypeAndColor2 = (e) => {
-    let type = e.target.value;
-    setType2(type);
-    let colorType = backgroundColor.find((item) => item.name === type);
-    setSecondaryColor(colorType.color);
-    setType([type1, type2]);
+    type2 = e.target.value;
+    setType(type2);
+  };
+
+  const setMove1 = (e) => {
+    move1 = e.target.value;
+    setMoves(move1);
+  };
+
+  const setMove2 = (e) => {
+    move2 = e.target.value;
+    setMoves(move2);
   };
 
   return (
@@ -113,43 +137,21 @@ export function CreatePokemon() {
           onChange={(e) => setImg(e.target.value)}
         ></input>
 
-        <div>
-          <p>Enter type 1</p>
-          <select onChange={setTypeAndColor1}>
-            <option value=""></option>
-            <option value="Rock">Rock</option>
-            <option value="Ghost">Ghost</option>
-            <option value="Steel">Steel</option>
-            <option value="Water">Water</option>
-            <option value="Grass">Grass</option>
-            <option value="Psychic">Psychic</option>
-            <option value="Normal">Normal</option>
-            <option value="Flying">Flying</option>
-            <option value="Poison">Poison</option>
-            <option value="Bug">Bug</option>
-            <option value="Fire">Fire</option>
-            <option value="Electric">Electric</option>
-          </select>
-        </div>
+        <p>Select type 1</p>
+        <input
+          type="text"
+          id="type1"
+          placeholder="Enter the move 1"
+          onChange={(e) => setTypeAndColor1(e.target.value)}
+        ></input>
 
-        <div>
-          <p>Enter type 2</p>
-          <select onChange={setTypeAndColor2}>
-            <option value=""></option>
-            <option value="Rock">Rock</option>
-            <option value="Ghost">Ghost</option>
-            <option value="Steel">Steel</option>
-            <option value="Water">Water</option>
-            <option value="Grass">Grass</option>
-            <option value="Psychic">Psychic</option>
-            <option value="Normal">Normal</option>
-            <option value="Flying">Flying</option>
-            <option value="Poison">Poison</option>
-            <option value="Bug">Bug</option>
-            <option value="Fire">Fire</option>
-            <option value="Electric">Electric</option>
-          </select>
-        </div>
+        <p>Select type 2</p>
+        <input
+          type="text"
+          id="type2"
+          placeholder="Enter the type 2"
+          onChange={(e) => setTypeAndColor2(e.target.value)}
+        ></input>
 
         <input
           type="text"
@@ -165,47 +167,21 @@ export function CreatePokemon() {
           onChange={(e) => setHeight(e.target.value)}
         ></input>
 
-        <div>
-          <p>Select move 1</p>
-          <select onChange={setMove1}>
-            <option value=""></option>
-            <option value="Sturdy">Sturdy</option>
-            <option value="Rock-Head">Ghost</option>
-            <option value="Mega-Punch">Steel</option>
-            <option value="Fire-Punch">Water</option>
-            <option value="Chlorophyll">Grass</option>
-            <option value="Overgrow">Psychic</option>
-            <option value="Torrent">Normal</option>
-            <option value="Rain-Dish">Flying</option>
-            <option value="Limber">Poison</option>
-            <option value="Imposter">Bug</option>
-            <option value="Compund-Eyes">Fire</option>
-            <option value="Levitate">Electric</option>
-            <option value="Electric">Electric</option>
-            <option value="Psychic">Electric</option>
-          </select>
-        </div>
+        <p>Select move 1</p>
+        <input
+          type="text"
+          id="move1"
+          placeholder="Enter the move 1"
+          onChange={(e) => setMove1(e.target.value)}
+        ></input>
 
-        <div>
-          <p>Select move 2</p>
-          <select onChange={setMove2}>
-            <option value=""></option>
-            <option value="Sturdy">Sturdy</option>
-            <option value="Rock-Head">Ghost</option>
-            <option value="Mega-Punch">Steel</option>
-            <option value="Fire-Punch">Water</option>
-            <option value="Chlorophyll">Grass</option>
-            <option value="Overgrow">Psychic</option>
-            <option value="Torrent">Normal</option>
-            <option value="Rain-Dish">Flying</option>
-            <option value="Limber">Poison</option>
-            <option value="Imposter">Bug</option>
-            <option value="Compund-Eyes">Fire</option>
-            <option value="Levitate">Electric</option>
-            <option value="Electric">Electric</option>
-            <option value="Psychic">Electric</option>
-          </select>
-        </div>
+        <p>Select move 2</p>
+        <input
+          type="text"
+          id="move2"
+          placeholder="Enter the move 2"
+          onChange={(e) => setMove2(e.target.value)}
+        ></input>
 
         <input
           type="text"
@@ -270,7 +246,30 @@ export function CreatePokemon() {
           onChange={(e) => setSecondaryColor(e.target.value)}
         ></input>
 
-        <button onClick={fetchForm}>Save changes & add Pokemon</button>
+        <button
+          onClick={(e) =>
+            fetchForm(
+              id,
+              img,
+              name,
+              type,
+              weight,
+              height,
+              moves,
+              description,
+              hp,
+              atk,
+              def,
+              satk,
+              sdef,
+              spd,
+              primaryColor,
+              secondaryColor
+            )
+          }
+        >
+          Save changes & add Pokemon
+        </button>
       </div>
     </>
   );
