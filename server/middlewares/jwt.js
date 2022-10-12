@@ -1,5 +1,3 @@
-exports.SECRET = "otravezlaconchadelmonotibetano";
-
 const jwt = require("jsonwebtoken");
 
 exports.validateJWT = (req, res, next) => {
@@ -9,7 +7,7 @@ exports.validateJWT = (req, res, next) => {
   }
 
   // aqui se valida el token
-  jwt.verify(token, exports.SECRET, (err, decoded) => {
+  jwt.verify(token, JWT_PRIVATE_KEY, (err, decoded) => {
     if (err) {
       return res.status(403).json({ msg: "invalid token" });
     }

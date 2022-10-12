@@ -1,18 +1,19 @@
 const router = require("express").Router();
 
+require("dotenv").config();
+
 const knex = require("knex")({
   client: "pg",
   connection: {
-    host: "localhost",
-    port: 5432,
-    user: "postgres",
-    password: "admin12345",
-    database: "pokemonesfinal",
+    host: process.env.POSTGRES_HOST,
+    port: process.env.POSTGRES_PORT,
+    user: process.env.POSTGRES_USER,
+    password: process.env.POSTGRES_PASSWORD,
+    database: process.env.POSTGRES_DATABASE,
   },
 });
 
 const jwt = require("jsonwebtoken");
-const { SECRET } = require("../middlewares/jwt");
 
 router.post("/login", (req, res, next) => {
   knex
@@ -31,7 +32,7 @@ router.post("/login", (req, res, next) => {
                 email: rows[0].email,
                 random_text: "la concha del mono tibetano",
               },
-              SECRET
+              JWT_PRIVATE_KEY
             ),
           });
         } else {

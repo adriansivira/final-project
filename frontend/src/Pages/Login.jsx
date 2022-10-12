@@ -32,9 +32,7 @@ export function Login() {
           localStorage.setItem("auth-token", result.auth_token);
         }
         console.log(result);
-        debugger;
         navigate("/home");
-        debugger;
       })
       .catch((error) => console.log("error", error));
   };
