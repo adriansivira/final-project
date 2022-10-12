@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./Card.css";
 import { ProgressBar } from "./ProgressBar";
+import "./Card.css";
 
 export const Card = () => {
   const { nombre } = useParams();
@@ -44,7 +44,8 @@ export const Card = () => {
   console.log(newPokemon);
   return (
     <>
-      {newPokemon && (
+    {isloading ? (
+      {newPokemon &&(
         <div
           style={{ backgroundColor: `${newPokemon.color_primario}` }}
           className="card"
@@ -202,6 +203,13 @@ export const Card = () => {
           </div>
         </div>
       )}
+
+
+    ):(
+        <div>
+          <SpinnerDotted />
+        </div>
+    )};
     </>
   );
 };

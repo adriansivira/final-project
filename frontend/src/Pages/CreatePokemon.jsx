@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
 import { PokemonBoxAdd } from "../Components/Box/PokemonBoxAdd";
+import { SpinnerDotted } from "spinners-react";
 import "../App.css";
 
 export function CreatePokemon() {
@@ -25,6 +26,7 @@ export function CreatePokemon() {
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const fetchForm = (
     id,
@@ -77,6 +79,9 @@ export function CreatePokemon() {
       .then(function (responseJSON) {
         if (responseJSON.success) {
           localStorage.setItem("auth-token", responseJSON.auth_token);
+          setTimeout(() => {
+            setLoading(true);
+          }, 1000);
           navigate("/home");
         }
       })
@@ -95,21 +100,21 @@ export function CreatePokemon() {
 
   const modalStyles = {
     content: {
-      top: "50%",
-      left: "50%",
+      top: "100%",
+      left: "auto",
       right: "auto",
       bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      transform: "translate(-20%, -20%)",
     },
   };
 
   return (
     <>
-      <div className="modal" onClick={openModal}>
+      <div className="newPokemon" onClick={openModal}>
         <PokemonBoxAdd />
       </div>
       <Modal
+        className="modal"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={modalStyles}

@@ -4,6 +4,7 @@ import "./box.css";
 
 export const PokemonBox = ({ nombre, id, img, color_primario }) => {
   const navigate = useNavigate();
+
   return (
     <article
       onClick={() => navigate(`/card/${nombre}`)}
