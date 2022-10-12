@@ -29,6 +29,7 @@ app.use(cors(corsOptions));
 
 app.get("/pokemones", pokeController.todospokemones);
 app.get("/pokemoncard", pokeController.pokemoncard);
+app.post("/pokemones", pokeController.newpokemon);
 app.use("/user", router);
 
 app.listen(8000, () => {
