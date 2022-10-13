@@ -77,15 +77,16 @@ input::placeholder {
   margin-bottom: 0px;
 }
 
-/* POKEMON BOX ADD /
+/* MODAL */
 
-.boxImage img {
-  box-sizing: border-box;
-  height: 50px;
-}
-/ LOGIN */
-
-.login {
+.modalBox {
+  display: flex;
   align-items: center;
-  margin: 0 auto;
+  justify-content: center;
+}
+
+.modal {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 80vw;
 }
