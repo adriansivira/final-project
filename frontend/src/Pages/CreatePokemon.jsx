@@ -93,26 +93,13 @@ export function CreatePokemon() {
     setIsOpen(false);
   }
 
-  const modalStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-    },
-  };
-
   return (
     <div className="modalBox">
       <div className="newPokemon" onClick={openModal}>
         <PokemonBoxAdd />
       </div>
-      <Modal
-        className="modal"
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={modalStyles}
-      >
+
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
         <button onClick={closeModal}>close</button>
 
         <h1 className="">Add a new Pokemon</h1>
