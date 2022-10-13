@@ -99,17 +99,16 @@ export function CreatePokemon() {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
     },
   };
 
   return (
-    <>
-      <div className="modal" onClick={openModal}>
+    <div className="modalBox">
+      <div className="newPokemon" onClick={openModal}>
         <PokemonBoxAdd />
       </div>
       <Modal
+        className="modal"
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         style={modalStyles}
@@ -117,10 +116,6 @@ export function CreatePokemon() {
         <button onClick={closeModal}>close</button>
 
         <h1 className="">Add a new Pokemon</h1>
-        <div className="back">
-          <button onClick={() => navigate("/home")}>Back to home</button>
-        </div>
-
         <div className="newPokemon">
           <input
             type="id"
@@ -280,6 +275,6 @@ export function CreatePokemon() {
           </button>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
