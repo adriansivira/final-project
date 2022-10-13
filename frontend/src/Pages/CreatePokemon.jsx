@@ -100,141 +100,178 @@ export function CreatePokemon() {
       </div>
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <button onClick={closeModal}>close</button>
+        <div className="buttonContainer">
+          <button className="closeButton" onClick={closeModal}>
+            Close
+          </button>
+        </div>
 
-        <h1 className="">Add a new Pokemon</h1>
+        <h1 className="modalTitle">Add a new Pokemon</h1>
         <div className="newPokemon">
-          <input
-            type="id"
-            id="id"
-            placeholder="Enter an id number"
-            onChange={(e) => setId(e.target.value)}
-          ></input>
+          <div className="id">
+            <p>Id</p>
+            <input
+              type="id"
+              placeholder="Enter an id number"
+              onChange={(e) => setId(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the name"
-            onChange={(e) => setName(e.target.value)}
-          ></input>
+          <div className="name">
+            <p>Name</p>
+            <input
+              type="text"
+              placeholder="Enter the name"
+              onChange={(e) => setName(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="url"
-            placeholder="Paste the URL of the new Pokemon"
-            onChange={(e) => setImg(e.target.value)}
-          ></input>
+          <div className="url">
+            <p>Image</p>
+            <input
+              type="text"
+              placeholder="Paste the URL of the image"
+              onChange={(e) => setImg(e.target.value)}
+            ></input>
+          </div>
 
-          <p>Select type 1</p>
-          <input
-            type="text"
-            id="type1"
-            placeholder="Enter the move 1"
-            onChange={(e) => setType1(e.target.value)}
-          ></input>
+          <div className="type1">
+            <p>Type 1</p>
+            <input
+              type="text"
+              placeholder="Enter the type 1"
+              onChange={(e) => setType1(e.target.value)}
+            ></input>
+          </div>
 
-          <p>Select type 2</p>
-          <input
-            type="text"
-            id="type2"
-            placeholder="Enter the type 2"
-            onChange={(e) => setType2(e.target.value)}
-          ></input>
+          <div className="type2">
+            <p>Type 2</p>
+            <input
+              type="text"
+              placeholder="Enter the type 2"
+              onChange={(e) => setType2(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the weight"
-            onChange={(e) => setWeight(e.target.value)}
-          ></input>
+          <div className="weightInput">
+            <p>Weight</p>
+            <input
+              type="text"
+              placeholder="Enter the weight"
+              onChange={(e) => setWeight(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the Heigth"
-            onChange={(e) => setHeight(e.target.value)}
-          ></input>
+          <div className="heightInput">
+            <p>Height</p>
+            <input
+              type="text"
+              placeholder="Enter the Heigth"
+              onChange={(e) => setHeight(e.target.value)}
+            ></input>
+          </div>
 
-          <p>Select move 1</p>
-          <input
-            type="text"
-            id="move1"
-            placeholder="Enter the move 1"
-            onChange={(e) => setMove1(e.target.value)}
-          ></input>
+          <div className="move1">
+            <p>Move 1</p>
+            <input
+              type="text"
+              placeholder="Enter the move 1"
+              onChange={(e) => setMove1(e.target.value)}
+            ></input>
+          </div>
 
-          <p>Select move 2</p>
-          <input
-            type="text"
-            id="move2"
-            placeholder="Enter the move 2"
-            onChange={(e) => setMove2(e.target.value)}
-          ></input>
+          <div className="move2">
+            <p>Move 2</p>
+            <input
+              type="text"
+              placeholder="Enter the move 2"
+              onChange={(e) => setMove2(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter a description"
-            onChange={(e) => setDescription(e.target.value)}
-          ></input>
+          <div className="description">
+            <p>Description</p>
+            <input
+              type="text"
+              placeholder="Enter a description"
+              onChange={(e) => setDescription(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the hp value"
-            onChange={(e) => setHp(e.target.value)}
-          ></input>
+          <div className="hp">
+            <p>Hp</p>
+            <input
+              type="text"
+              placeholder="Enter the hp value"
+              onChange={(e) => setHp(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the atk value"
-            onChange={(e) => setAtk(e.target.value)}
-          ></input>
+          <div className="atk">
+            <p>Atk</p>
+            <input
+              type="text"
+              placeholder="Enter the atk value"
+              onChange={(e) => setAtk(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the def value"
-            onChange={(e) => setDef(e.target.value)}
-          ></input>
+          <div className="def">
+            <p>Def</p>
+            <input
+              type="text"
+              placeholder="Enter the def value"
+              onChange={(e) => setDef(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the satk value"
-            onChange={(e) => setSatk(e.target.value)}
-          ></input>
+          <div className="satk">
+            <p>Satk</p>
+            <input
+              type="text"
+              placeholder="Enter the satk value"
+              onChange={(e) => setSatk(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the sdef value"
-            onChange={(e) => setSdef(e.target.value)}
-          ></input>
+          <div className="sdef">
+            <p>Sdef</p>
+            <input
+              type="text"
+              placeholder="Enter the sdef value"
+              onChange={(e) => setSdef(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the spd value"
-            onChange={(e) => setSpd(e.target.value)}
-          ></input>
+          <div className="spd">
+            <p>Spd</p>
+            <input
+              type="text"
+              placeholder="Enter the spd value"
+              onChange={(e) => setSpd(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the primary color"
-            onChange={(e) => setPrimaryColor(e.target.value)}
-          ></input>
+          <div className="primaryColor">
+            <p>Primary Color</p>
+            <input
+              type="text"
+              placeholder="Enter the primary color"
+              onChange={(e) => setPrimaryColor(e.target.value)}
+            ></input>
+          </div>
 
-          <input
-            type="text"
-            id="id"
-            placeholder="Enter the secondary color"
-            onChange={(e) => setSecondaryColor(e.target.value)}
-          ></input>
+          <div className="secondaryColor">
+            <p>Secondary Color</p>
+            <input
+              type="text"
+              placeholder="Enter the secondary color"
+              onChange={(e) => setSecondaryColor(e.target.value)}
+            ></input>
+          </div>
 
           <button
+            className="saveButton"
             onClick={(e) =>
               fetchForm(
                 id,
