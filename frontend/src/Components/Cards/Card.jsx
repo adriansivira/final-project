@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import "./Card.css";
 import { ProgressBar } from "./ProgressBar";
+import { SpinnerDotted } from "spinners-react";
 
 export const Card = () => {
   const { nombre } = useParams();
@@ -13,6 +14,7 @@ export const Card = () => {
   // Hacer usestate para capturar los datos desde el fetch
 
   useEffect(() => {
+    setisLoading(true);
     fetch("http://localhost:8000/pokemoncard/", {
       method: "GET",
       headers: {
@@ -23,11 +25,13 @@ export const Card = () => {
       .then((response) => response.json())
       .then((result) => {
         setDatacard(result);
-        setTimeout(() => {
-          setisLoading(true);
-        }, 1000);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log("error", error))
+      .finally(() => {
+        setTimeout(() => {
+          setisLoading(false);
+        }, 1000);
+      });
   }, []);
 
   let index;
@@ -41,10 +45,19 @@ export const Card = () => {
     }
   });
 
-  console.log(newPokemon);
+  const x = undefined;
+
+  const a = true;
+  const resultado = a && x;
+
   return (
     <>
-      {newPokemon && (
+      {isloading && (
+        <div>
+          <SpinnerDotted />
+        </div>
+      )}
+      {newPokemon && !isloading && (
         <div
           style={{ backgroundColor: `${newPokemon.color_primario}` }}
           className="card"
