@@ -86,7 +86,17 @@ input::placeholder {
 }
 
 .modal {
+  overflow-y: hidden;
   box-sizing: border-box;
   height: 100vh;
   width: 80vw;
+}
+
+.newPokemon {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.newPokemon input {
+  height: 30px;
 }
