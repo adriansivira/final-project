@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "../App.css";
 import { PokemonBox } from "../Components/Box/PokemonBox";
 import { SpinnerDotted } from "spinners-react";
-import { CreatePokemon } from "./CreatePokemon";
+import { CreatePokemon } from "../Components/NewPokemon/CreatePokemon";
 
 export const Home = () => {
   const [data, setData] = useState([]);
@@ -10,6 +10,7 @@ export const Home = () => {
   const [orderArrow, setorderArrow] = useState(true);
   const [chosenList, setChosenList] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [time, setTime] = useState(0);
 
   let search; //Variable que captura el texto del input
   let filteredList; //Variable que devuelve la lista según la búsqueda
@@ -41,7 +42,7 @@ export const Home = () => {
         }, 1000);
       })
       .catch((err) => alert(err));
-  }, []);
+  }, [time]);
 
   useEffect(() => {
     if (order && orderArrow) {
@@ -134,7 +135,7 @@ export const Home = () => {
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
       <div className="App">
-        <CreatePokemon />
+        <CreatePokemon setTime={setTime} />
         {loading === true ? (
           chosenList.map((poke) => (
             <PokemonBox

@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Modal from "react-modal";
-import { PokemonBoxAdd } from "../Components/Box/PokemonBoxAdd";
-import "../App.css";
+import { PokemonBoxAdd } from "../Box/PokemonBoxAdd";
+import "./form.css";
 
-export function CreatePokemon() {
-  const navigate = useNavigate();
+export function CreatePokemon({ setTime }) {
+  const [modalIsOpen, setIsOpen] = useState(false);
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
@@ -24,7 +23,6 @@ export function CreatePokemon() {
   const [spd, setSpd] = useState("");
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
-  const [modalIsOpen, setIsOpen] = useState(false);
 
   const fetchForm = (
     id,
@@ -77,8 +75,8 @@ export function CreatePokemon() {
       .then(function (responseJSON) {
         if (responseJSON.success) {
           localStorage.setItem("auth-token", responseJSON.auth_token);
-          navigate("/home");
         }
+        setTime(Date.now());
       })
       .catch((err) => {
         console.log(err);
@@ -269,10 +267,9 @@ export function CreatePokemon() {
               onChange={(e) => setSecondaryColor(e.target.value)}
             ></input>
           </div>
-
           <button
             className="saveButton"
-            onClick={(e) =>
+            onClick={(e) => {
               fetchForm(
                 id,
                 img,
@@ -292,8 +289,10 @@ export function CreatePokemon() {
                 spd,
                 primaryColor,
                 secondaryColor
-              )
-            }
+              );
+              setIsOpen(false);
+              // setTime(Date.now());
+            }}
           >
             Save changes & add Pokemon
           </button>
