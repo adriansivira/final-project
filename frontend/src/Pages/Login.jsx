@@ -27,17 +27,21 @@ export function Login() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8000/user/login", requestOptions);
-    setisLoading(true)
-      .then((response) => response.text())
+    setisLoading(true);
+    fetch("http://localhost:8000/user/login", requestOptions)
+      .then((response) => response.json())
       .then((result) => {
+        console.log(result);
+        console.log(result.success);
         if (result.success) {
-          localStorage.setItem("auth-token", result.auth_token);
+          console.log("entró");
+          setTimeout(() => {
+            console.log(result.auth_token);
+            localStorage.setItem("auth-token", result.auth_token);
+            setisLoading(false);
+            navigate("/home");
+          }, 1000);
         }
-        setTimeout(() => {
-          setisLoading(false);
-          navigate("/home");
-        }, 1000);
       })
       .catch((error) => console.log("error", error));
   };
@@ -76,6 +80,7 @@ export function Login() {
           />
         </div>
       </form>
+
       {isloading ? (
         <div>
           <SpinnerDotted />
