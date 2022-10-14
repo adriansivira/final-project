@@ -26,8 +26,8 @@ h3 {
   margin-top: 1%;
 }
 
-img {
-  height: 65%;
+.imageSize {
+  height: 150px;
   vertical-align: middle;
 }
 
