@@ -14,7 +14,7 @@ export const PokemonBox = ({ nombre, id, img, color_primario }) => {
         <div className="idBox">
           <p style={{ color: `${color_primario}` }}>#{id}</p>
         </div>
-        <img src={img} />
+        <img className="imageSize" src={img} />
       </div>
       <div className="box-title">
         <h3>{nombre}</h3>

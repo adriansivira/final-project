@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SpinnerDotted } from "spinners-react";
+import "../App.css";
 
 export function Login() {
   const [name, setName] = useState("");
@@ -27,21 +28,18 @@ export function Login() {
       redirect: "follow",
     };
 
-    setisLoading(true);
-    fetch("http://localhost:8000/user/login", requestOptions)
+    fetch("http://localhost:8000/user/login", requestOptions);
+    setisLoading(true)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-        console.log(result.success);
         if (result.success) {
-          console.log("entró");
-          setTimeout(() => {
-            console.log(result.auth_token);
-            localStorage.setItem("auth-token", result.auth_token);
-            setisLoading(false);
-            navigate("/home");
-          }, 1000);
+          localStorage.setItem("auth-token", result.auth_token);
         }
+        console.log(result);
+        setTimeout(() => {
+          setisLoading(false);
+          navigate("/home");
+        }, 1000);
       })
       .catch((error) => console.log("error", error));
   };
@@ -79,23 +77,24 @@ export function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
+        {isloading ? (
+          <div>
+            <SpinnerDotted />
+          </div>
+        ) : (
+          <div className="divButton">
+            <button
+              className="loginButton"
+              onClick={(e) => {
+                e.preventDefault();
+                login(name, email, password);
+              }}
+            >
+              Log in
+            </button>
+          </div>
+        )}
       </form>
-
-      {isloading ? (
-        <div>
-          <SpinnerDotted />
-        </div>
-      ) : (
-        <button
-          className="loginButton"
-          onClick={(e) => {
-            e.preventDefault();
-            login(name, email, password);
-          }}
-        >
-          Log in
-        </button>
-      )}
     </div>
   );
 }

@@ -14,7 +14,7 @@ const knex = require("knex")({
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemonlist")
+    .from("pokemones")
     .then((result) => {
       res.json(result);
       next();
@@ -26,7 +26,7 @@ exports.pokemoncard = (req, res, next) => {
   knex
     // .where("nombre", nombre)
     .select("*")
-    .from("pokemonlist")
+    .from("pokemones")
 
     .then((result) => {
       res.json(result);
@@ -40,7 +40,7 @@ exports.pokemoncard = (req, res, next) => {
 
 exports.newpokemon = (req, res, next) => {
   const r = req.body;
-  knex("pokemonlist")
+  knex("pokemones")
     .returning("*")
     .insert({
       id: r.id,

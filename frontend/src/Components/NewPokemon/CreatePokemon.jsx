@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
 import { PokemonBoxAdd } from "../Box/PokemonBoxAdd";
-import "./form.css";
 import { NewPokemonForm } from "./NewPokemonForm";
+import "./form.css";
 
 export function CreatePokemon({ setTime }) {
   const [modalIsOpen, setIsOpen] = useState(false);

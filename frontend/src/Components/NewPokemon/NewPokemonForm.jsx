@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
+import { SpinnerDotted } from "spinners-react";
 import "./form.css";
+import "../Box/box.css";
 
 export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
   const [id, setId] = useState("");
@@ -21,6 +23,7 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
   const [spd, setSpd] = useState("");
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
+  const [isloading, setIsLoading] = useState("");
 
   return (
     <>
@@ -53,6 +56,7 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
         <div className="url">
           <p>Image</p>
           <input
+            className="imageSize"
             type="text"
             placeholder="Paste the URL of the image"
             onChange={(e) => setImg(e.target.value)}
@@ -193,34 +197,40 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
             onChange={(e) => setSecondaryColor(e.target.value)}
           ></input>
         </div>
-        <button
-          className="saveButton"
-          onClick={(e) => {
-            fetchForm(
-              id,
-              img,
-              name,
-              type1,
-              type2,
-              weight,
-              height,
-              move1,
-              move2,
-              description,
-              hp,
-              atk,
-              def,
-              satk,
-              sdef,
-              spd,
-              primaryColor,
-              secondaryColor
-            );
-            setIsOpen(false);
-          }}
-        >
-          Save changes & add Pokemon
-        </button>
+        {isloading ? (
+          <div>
+            <SpinnerDotted />
+          </div>
+        ) : (
+          <button
+            className="saveButton"
+            onClick={(e) => {
+              fetchForm(
+                id,
+                img,
+                name,
+                type1,
+                type2,
+                weight,
+                height,
+                move1,
+                move2,
+                description,
+                hp,
+                atk,
+                def,
+                satk,
+                sdef,
+                spd,
+                primaryColor,
+                secondaryColor
+              );
+              setIsOpen(false);
+            }}
+          >
+            Save changes & add Pokemon
+          </button>
+        )}
       </div>
     </>
   );
