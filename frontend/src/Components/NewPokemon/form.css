@@ -1,0 +1,117 @@
+/* GRID DEL MODAL */
+
+.newPokemon {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  grid-template-areas:
+    "id description"
+    "name hp"
+    "url atk"
+    "type1 def"
+    "type2 satk"
+    "weightInput sdef"
+    "heightInput spd"
+    "move1 primaryColor"
+    "move2 secondaryColor"
+    "saveButton saveButton";
+}
+
+.id {
+  grid-area: id;
+}
+.name {
+  grid-area: name;
+}
+
+.url {
+  grid-area: url;
+}
+
+.description {
+  grid-area: description;
+}
+
+.hp {
+  grid-area: hp;
+}
+
+.atk {
+  grid-area: atk;
+}
+.type1 {
+  grid-area: type1;
+}
+.type2 {
+  grid-area: type2;
+}
+
+.def {
+  grid-area: def;
+}
+
+.atk {
+  grid-area: atk;
+}
+
+.weightInput {
+  grid-area: weightInput;
+}
+
+.heightInput {
+  grid-area: heightInput;
+}
+
+.sdef {
+  grid-area: sdef;
+}
+
+.spd {
+  grid-area: spd;
+}
+.move1 {
+  grid-area: move1;
+}
+
+.move2 {
+  grid-area: move2;
+}
+
+.primaryColor {
+  grid-area: primaryColor;
+}
+
+.secondaryColor {
+  grid-area: secondaryColor;
+}
+
+.saveButton {
+  grid-area: saveButton;
+  margin: 0 auto;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  background-color: rgb(172, 165, 165);
+  color: black;
+  font-size: 20px;
+}
+
+.modalTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeButton {
+  font-size: 20px;
+  width: 80px;
+  border-radius: 20px;
+  background-color: rgb(224, 88, 88);
+}

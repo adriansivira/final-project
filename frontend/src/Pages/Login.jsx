@@ -38,8 +38,10 @@ export function Login() {
   };
 
   return (
-    <>
-      <h1>Bienvenido a Pokedex</h1>
+    <div className="loginPage">
+      <div className="loginTitle">
+        <h1>Bienvenido a Pokedex</h1>
+      </div>
       <form className="login">
         <div className="loginName">
           <label for="fname">Name</label>
@@ -68,16 +70,16 @@ export function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button
-          className="loginButton"
-          onClick={(e) => {
-            e.preventDefault();
-            login(name, email, password);
-          }}
-        >
-          Log in
-        </button>
       </form>
-    </>
+      <button
+        className="loginButton"
+        onClick={(e) => {
+          e.preventDefault();
+          login(name, email, password);
+        }}
+      >
+        Log in
+      </button>
+    </div>
   );
 }
