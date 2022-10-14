@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SpinnerDotted } from "spinners-react";
 
 export function Login() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isloading, setisLoading] = useState(false);
   const navigate = useNavigate();
 
   const login = (name, email, password) => {
@@ -25,14 +27,17 @@ export function Login() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8000/user/login", requestOptions)
+    fetch("http://localhost:8000/user/login", requestOptions);
+    setisLoading(true)
       .then((response) => response.text())
       .then((result) => {
         if (result.success) {
           localStorage.setItem("auth-token", result.auth_token);
         }
-        console.log(result);
-        navigate("/home");
+        setTimeout(() => {
+          setisLoading(false);
+          navigate("/home");
+        }, 1000);
       })
       .catch((error) => console.log("error", error));
   };
@@ -71,15 +76,21 @@ export function Login() {
           />
         </div>
       </form>
-      <button
-        className="loginButton"
-        onClick={(e) => {
-          e.preventDefault();
-          login(name, email, password);
-        }}
-      >
-        Log in
-      </button>
+      {isloading ? (
+        <div>
+          <SpinnerDotted />
+        </div>
+      ) : (
+        <button
+          className="loginButton"
+          onClick={(e) => {
+            e.preventDefault();
+            login(name, email, password);
+          }}
+        >
+          Log in
+        </button>
+      )}
     </div>
   );
 }
