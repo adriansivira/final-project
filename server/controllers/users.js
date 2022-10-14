@@ -32,7 +32,7 @@ router.post("/login", (req, res, next) => {
                 email: rows[0].email,
                 random_text: "la concha del mono tibetano",
               },
-              JWT_PRIVATE_KEY
+              process.env.JWT_PRIVATE_KEY
             ),
           });
         } else {
