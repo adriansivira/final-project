@@ -7,7 +7,7 @@ export const PokemonBoxAdd = () => {
       <div className="boxImage">
         <img
           className="imageSize"
-          // src="./Imagenes/Recursos/questionImage.png"
+          src="./Imagenes/Recursos/questionImage.png"
         />
       </div>
       <div className="boxText">

@@ -6,6 +6,7 @@ import "./form.css";
 
 export function CreatePokemon({ setTime }) {
   const [modalIsOpen, setIsOpen] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
 
   const fetchForm = (
     id,
@@ -27,6 +28,7 @@ export function CreatePokemon({ setTime }) {
     color_primario,
     color_secundario
   ) => {
+    setIsLoading(true);
     fetch("http://localhost:8000/pokemones", {
       method: "POST",
       headers: {
@@ -59,6 +61,9 @@ export function CreatePokemon({ setTime }) {
         if (responseJSON.success) {
           localStorage.setItem("auth-token", responseJSON.auth_token);
         }
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 3000);
         setTime(Date.now());
       })
       .catch((err) => {
@@ -85,6 +90,7 @@ export function CreatePokemon({ setTime }) {
           closeModal={closeModal}
           fetchForm={fetchForm}
           setIsOpen={setIsOpen}
+          isloading={isloading}
         />
       </Modal>
     </div>

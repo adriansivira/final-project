@@ -4,7 +4,12 @@ import { SpinnerDotted } from "spinners-react";
 import "./form.css";
 import "../Box/box.css";
 
-export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
+export const NewPokemonForm = ({
+  closeModal,
+  fetchForm,
+  setIsOpen,
+  isloading,
+}) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
   const [img, setImg] = useState("");
@@ -23,7 +28,6 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
   const [spd, setSpd] = useState("");
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
-  const [isloading, setIsLoading] = useState("");
 
   return (
     <>
@@ -198,7 +202,7 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
           ></input>
         </div>
         {isloading ? (
-          <div>
+          <div className="spinner">
             <SpinnerDotted />
           </div>
         ) : (
@@ -225,7 +229,9 @@ export const NewPokemonForm = ({ closeModal, fetchForm, setIsOpen }) => {
                 primaryColor,
                 secondaryColor
               );
-              setIsOpen(false);
+              setTimeout(() => {
+                setIsOpen(false);
+              }, 1000);
             }}
           >
             Save changes & add Pokemon
