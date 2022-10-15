@@ -28,8 +28,8 @@ export function Login() {
       redirect: "follow",
     };
 
-    fetch("http://localhost:8000/user/login", requestOptions);
-    setisLoading(true)
+    setisLoading(true);
+    fetch("http://localhost:8000/user/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         if (result.success) {
@@ -49,52 +49,54 @@ export function Login() {
       <div className="loginTitle">
         <h1>Bienvenido a Pokedex</h1>
       </div>
-      <form className="login">
-        <div className="loginName">
-          <label for="fname">Name</label>
-          <input
-            type="text"
-            id="text"
-            placeholder="Enter your name"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="loginMail">
-          <label for="">Email</label>
-          <input
-            type="email"
-            id="email"
-            placeholder="Enter your email"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="loginPassword">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            placeholder="Enter your password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        {isloading ? (
-          <div>
-            <SpinnerDotted />
+      <div className="backgroundLogin">
+        <form className="login">
+          <div className="loginName">
+            <label for="fname">Name</label>
+            <input
+              type="text"
+              id="text"
+              placeholder="Enter your name"
+              onChange={(e) => setName(e.target.value)}
+            />
           </div>
-        ) : (
-          <div className="divButton">
-            <button
-              className="loginButton"
-              onClick={(e) => {
-                e.preventDefault();
-                login(name, email, password);
-              }}
-            >
-              Log in
-            </button>
+          <div className="loginMail">
+            <label for="">Email</label>
+            <input
+              type="email"
+              id="email"
+              placeholder="Enter your email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
           </div>
-        )}
-      </form>
+          <div className="loginPassword">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              placeholder="Enter your password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          {isloading ? (
+            <div>
+              <SpinnerDotted />
+            </div>
+          ) : (
+            <div className="divButton">
+              <button
+                className="loginButton"
+                onClick={(e) => {
+                  e.preventDefault();
+                  login(name, email, password);
+                }}
+              >
+                Log in
+              </button>
+            </div>
+          )}
+        </form>
+      </div>
     </div>
   );
 }
