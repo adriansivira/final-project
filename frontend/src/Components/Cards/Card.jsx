@@ -53,7 +53,7 @@ export const Card = () => {
   return (
     <>
       {isloading && (
-        <div>
+        <div className="spinner">
           <SpinnerDotted />
         </div>
       )}
