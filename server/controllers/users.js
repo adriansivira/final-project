@@ -17,7 +17,7 @@ const jwt = require("jsonwebtoken");
 
 router.post("/login", (req, res, next) => {
   knex
-    .select("email", "pwd", "id", "nombre")
+    .select("email", "pwd", "id")
     .from("usuarios")
     .where("email", req.body.email)
     .then((rows) => {
@@ -35,16 +35,22 @@ router.post("/login", (req, res, next) => {
               process.env.JWT_PRIVATE_KEY
             ),
           });
-        } else {
-          res.status(404).json({ msg: "mail o password incorrecto" });
         }
+        if (req.body.pwd !== rows[0].pwd) {
+          res.status(404).json({ msg: "password incorrecto" });
+        }
+      }
+      if (req.body.email === "") {
+        res.status(404).json({ msg: "Llena el campo Email" });
+      }
+      if (req.body.pwd === "") {
+        res.status(404).json({ msg: "Introduce una constraseña" });
       } else {
-        res.status(404).json({ msg: "mail o password incorrecto" });
+        res.status(404).json({ msg: "Email o contraseña incorrecta" });
       }
     })
     .catch((err) => {
-      res.status(500).send("Error");
-      console.log(err);
+      res.status(500);
     })
     .finally(() => {
       next();

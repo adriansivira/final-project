@@ -25,6 +25,7 @@ export const Home = () => {
   };
 
   useEffect(() => {
+    setLoading(true);
     fetch("http://localhost:8000/pokemones", {
       method: "GET",
       redirect: "follow",
@@ -38,8 +39,8 @@ export const Home = () => {
         setData([...response].sort(sortingAlphaListMayor));
         setChosenList([...response].sort(sortingAlphaListMayor));
         setTimeout(() => {
-          setLoading(true);
-        }, 1000);
+          setLoading(false);
+        }, 2000);
       })
       .catch((err) => alert(err));
   }, [time]);
@@ -112,6 +113,10 @@ export const Home = () => {
       <header>
         <img alt="Hola" src="./Imagenes/Recursos/Pokeball.png" />
         <h1>Pokédex</h1>
+        <div className="newpokButton">
+          <CreatePokemon setTime={setTime} />
+        </div>
+
         <section className="order arrow">
           {order ? (
             <p onClick={handleOrder}>Aa</p>
@@ -134,9 +139,8 @@ export const Home = () => {
         </section>
       </header>
       <input type="search" placeholder="Buscar" onChange={handleSearch} />
-      <div className="App">
-        <CreatePokemon setTime={setTime} />
-        {loading === true ? (
+      <div className={!loading ? "App" : "loading"}>
+        {!loading === true ? (
           chosenList.map((poke) => (
             <PokemonBox
               nombre={poke.nombre}
@@ -146,7 +150,7 @@ export const Home = () => {
             />
           ))
         ) : (
-          <div>
+          <div className="spinnerhome">
             <SpinnerDotted />
           </div>
         )}

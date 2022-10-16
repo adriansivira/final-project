@@ -1,6 +1,7 @@
 const { response, request } = require("express");
 const express = require("express");
 const pokeController = require("./controllers/pokemones");
+const { body } = require("express-validator");
 
 const app = express();
 const cors = require("cors");

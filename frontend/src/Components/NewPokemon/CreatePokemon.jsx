@@ -81,8 +81,11 @@ export function CreatePokemon({ setTime }) {
 
   return (
     <div className="modalBox">
-      <div className="newPokemon" onClick={openModal}>
-        <PokemonBoxAdd />
+      <div
+        className={modalIsOpen ? "newPokemon" : "newpokButton"}
+        onClick={openModal}
+      >
+        <button>Agregar nuevo Pokemon</button>
       </div>
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
