@@ -4,19 +4,18 @@ import { SpinnerDotted } from "spinners-react";
 import "../App.css";
 
 export function Login() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
+  const [mail, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isloading, setisLoading] = useState(false);
+  const [errorMsg, seterrorMsg] = useState("");
   const navigate = useNavigate();
 
-  const login = (name, email, password) => {
+  const login = (email, password) => {
     let myHeaders = new Headers();
     myHeaders.append("auth-token", "");
     myHeaders.append("Content-Type", "application/json");
 
     const raw = JSON.stringify({
-      nombre: name,
       email: email,
       pwd: password,
     });
@@ -34,12 +33,14 @@ export function Login() {
       .then((result) => {
         if (result.success) {
           localStorage.setItem("auth-token", result.auth_token);
-        }
-        console.log(result);
-        setTimeout(() => {
+          setTimeout(() => {
+            setisLoading(false);
+            navigate("/home");
+          }, 1000);
+        } else {
+          seterrorMsg(result.msg);
           setisLoading(false);
-          navigate("/home");
-        }, 1000);
+        }
       })
       .catch((error) => console.log("error", error));
   };
@@ -51,15 +52,7 @@ export function Login() {
       </div>
       <div className="backgroundLogin">
         <form className="login">
-          <div className="loginName">
-            <label for="fname">Name</label>
-            <input
-              type="text"
-              id="text"
-              placeholder="Enter your name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
+          {errorMsg ? <p>{errorMsg}</p> : ""}
           <div className="loginMail">
             <label for="">Email</label>
             <input
@@ -88,7 +81,8 @@ export function Login() {
                 className="loginButton"
                 onClick={(e) => {
                   e.preventDefault();
-                  login(name, email, password);
+                  login(mail, password);
+                  seterrorMsg("");
                 }}
               >
                 Log in
@@ -96,6 +90,10 @@ export function Login() {
             </div>
           )}
         </form>
+        <div className="buttonregister">
+          <h3>¿No tienes usuario?</h3>
+          <button className="regButton">Registrarse</button>
+        </div>
       </div>
     </div>
   );

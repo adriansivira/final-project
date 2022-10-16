@@ -14,9 +14,13 @@ const knex = require("knex")({
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemones")
+    .from("pokemonlist")
     .then((result) => {
       res.json(result);
+      next();
+    })
+    .catch((err) => {
+      res.status(500).json({ message: "error" });
       next();
     });
 };
@@ -26,7 +30,7 @@ exports.pokemoncard = (req, res, next) => {
   knex
     // .where("nombre", nombre)
     .select("*")
-    .from("pokemones")
+    .from("pokemonlist")
 
     .then((result) => {
       res.json(result);
@@ -40,7 +44,7 @@ exports.pokemoncard = (req, res, next) => {
 
 exports.newpokemon = (req, res, next) => {
   const r = req.body;
-  knex("pokemones")
+  knex("pokemonlist")
     .returning("*")
     .insert({
       id: r.id,
@@ -63,6 +67,7 @@ exports.newpokemon = (req, res, next) => {
     .then((result) => {
       res.status(201).json(result[0]);
       console.log(result);
+
       next();
     })
     .catch((err) => {
