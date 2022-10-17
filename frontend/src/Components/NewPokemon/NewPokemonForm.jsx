@@ -9,6 +9,7 @@ export const NewPokemonForm = ({
   fetchForm,
   setIsOpen,
   isloading,
+  NewPokeRespondForm,
 }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -229,9 +230,9 @@ export const NewPokemonForm = ({
                 primaryColor,
                 secondaryColor
               );
-              setTimeout(() => {
-                setIsOpen(false);
-              }, 1000);
+              // {
+              //   NewPokeRespondForm && setIsOpen(false);
+              // }
             }}
           >
             Save changes & add Pokemon
