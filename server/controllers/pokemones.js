@@ -1,4 +1,5 @@
 require("dotenv").config();
+const { validationResult } = require("express-validator");
 
 const knex = require("knex")({
   client: "pg",
@@ -43,6 +44,11 @@ exports.pokemoncard = (req, res, next) => {
 };
 
 exports.newpokemon = (req, res, next) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
+
   const r = req.body;
   knex("pokemonlist")
     .returning("*")
@@ -65,14 +71,12 @@ exports.newpokemon = (req, res, next) => {
       color_secundario: r.color_secundario,
     })
     .then((result) => {
-      res.status(201).json(result[0]);
+      res.status(201).json(result);
       console.log(result);
-
       next();
     })
     .catch((err) => {
-      res.status(500).json({ message: "error" });
-      console.log(err);
+      res.status(500);
       next();
     });
 };

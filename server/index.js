@@ -7,6 +7,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const router = require("./controllers/users");
+const { NewPokemonValidator } = require("./Validators/NewPokemonValidator");
 
 app.use(bodyParser.json());
 
@@ -30,7 +31,7 @@ app.use(cors(corsOptions));
 
 app.get("/pokemones", pokeController.todospokemones);
 app.get("/pokemoncard", pokeController.pokemoncard);
-app.post("/pokemones", pokeController.newpokemon);
+app.post("/pokemones", NewPokemonValidator, pokeController.newpokemon);
 app.use("/user", router);
 
 app.listen(8000, () => {
