@@ -69,7 +69,6 @@ export function CreatePokemon({ setTime }) {
           setNewPokeResponseForm(responseJSON);
         }
         setTimeout(() => {
-          setIsOpen(false);
           setIsLoading(false);
         }, 3000);
         console.log(responseJSON);
