@@ -33,10 +33,16 @@ export function Register() {
     fetch("http://localhost:8000/user/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        setTimeout(() => {
+        if (result.errors) {
           setisLoading(false);
-          navigate("/");
-        }, 1000);
+          seterrorMsg(result.errors);
+        }
+        if (!result.errors) {
+          setTimeout(() => {
+            navigate("/");
+          }, 1000);
+        }
+        setisLoading(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -48,7 +54,13 @@ export function Register() {
       </div>
       <div className="backgroundLogin">
         <form className="login">
-          {errorMsg ? <p>{errorMsg}</p> : ""}
+          {errorMsg
+            ? errorMsg.map((err) => (
+                <>
+                  <li className="msgerror">{err}</li>
+                </>
+              ))
+            : ""}
 
           <div className="nameRegister">
             <label for="password">Nombre</label>
@@ -91,7 +103,6 @@ export function Register() {
                 onClick={(e) => {
                   e.preventDefault();
                   register(name, mail, password);
-                  seterrorMsg("");
                 }}
               >
                 Registrarse
