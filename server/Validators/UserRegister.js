@@ -12,5 +12,8 @@ exports.userRegister = [
     .exists()
     .notEmpty()
     .withMessage("Campo requerido")
-    .isLength({ min: 5, max: 10 }),
+    .isLength({ min: 5, max: 10 })
+    .withMessage(
+      "La contraseña debe tener 5 caracteres como mínimo y 10 de máximo"
+    ),
 ];
