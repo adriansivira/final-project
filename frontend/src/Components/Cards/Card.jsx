@@ -1,15 +1,48 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import "./Card.css";
 import { ProgressBar } from "./ProgressBar";
+import Modal from "react-modal";
 import { SpinnerDotted } from "spinners-react";
+import { NewPokemonForm } from "../NewPokemon/NewPokemonForm";
+import { FaEdit } from "react-icons/fa";
+import "./Card.css";
 
 export const Card = () => {
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [img, setImg] = useState("");
+  const [type1, setType1] = useState("");
+  const [type2, setType2] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [move1, setMove1] = useState("");
+  const [move2, setMove2] = useState("");
+  const [description, setDescription] = useState("");
+  const [hp, setHp] = useState("");
+  const [atk, setAtk] = useState("");
+  const [def, setDef] = useState("");
+  const [satk, setSatk] = useState("");
+  const [sdef, setSdef] = useState("");
+  const [spd, setSpd] = useState("");
+  const [primaryColor, setPrimaryColor] = useState("");
+  const [secondaryColor, setSecondaryColor] = useState("");
+
   const { nombre } = useParams();
   const navigate = useNavigate();
   const [datacard, setDatacard] = useState([]);
   const [isloading, setisLoading] = useState(false);
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
+
+  function openEdit() {
+    setIsOpen(true);
+  }
+
+  function closeEdit() {
+    setIsOpen(false);
+  }
 
   // Hacer usestate para capturar los datos desde el fetch
 
@@ -45,11 +78,6 @@ export const Card = () => {
     }
   });
 
-  const x = undefined;
-
-  const a = true;
-  const resultado = a && x;
-
   return (
     <>
       {isloading && (
@@ -71,7 +99,10 @@ export const Card = () => {
               />
               <h1>{newPokemon.nombre}</h1>
             </div>
-            <h1>#{newPokemon.id}</h1>
+
+            <h1 className={modalIsOpen ? "pokeId2" : "pokeId"}>
+              #{newPokemon.id}
+            </h1>
           </div>
           {/* POKEMON IMAGE AND ARROW */}
           <img className="pokeballImg" src="/Imagenes/Recursos/Pokeball.png" />
@@ -108,6 +139,7 @@ export const Card = () => {
             </Link>
           </div>
           {/* EL WHITE BOX */}
+
           <div className="whiteBox">
             {/* POKEMON TYPE*/}
             <div className="types">
@@ -123,7 +155,38 @@ export const Card = () => {
                 </p>
               ))}
             </div>
-            {/* ABOUT SECTION */}
+            {/* EDIT POKEMON */}
+            <div className="edit">
+              <button
+                className="editButton"
+                onClick={openEdit}
+                style={{
+                  backgroundColor: `${newPokemon.color_primario}`,
+                  color: `white`,
+                }}
+              >
+                Editar pokemon
+                <FaEdit />
+              </button>
+              <Modal isOpen={modalIsOpen} onRequestClose={closeEdit}>
+                <NewPokemonForm
+                  style={{
+                    zIndex: 0,
+                  }}
+                  closeModal={closeEdit}
+                  setIsOpen={setIsOpen}
+                  isloading={isloading}
+                />
+                {formErrors
+                  ? formErrors.map((err) => (
+                      <>
+                        <li className="msgerror">{err}</li>
+                      </>
+                    ))
+                  : ""}
+              </Modal>
+            </div>
+            ;{/* ABOUT SECTION */}
             <h2
               className="aboutTitle"
               style={{ color: `${newPokemon.color_primario}` }}

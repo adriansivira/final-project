@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import { PokemonBoxAdd } from "../Box/PokemonBoxAdd";
 import { NewPokemonForm } from "./NewPokemonForm";
 import "./form.css";
 
