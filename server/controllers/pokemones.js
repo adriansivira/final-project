@@ -44,9 +44,15 @@ exports.pokemoncard = (req, res, next) => {
 };
 
 exports.newpokemon = (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
+  const errorFormatter = ({ msg, param, value }) => {
+    // Build your resulting errors however you want! String, object, whatever - it works!
+    return `${value}[${param}]: ${msg}`;
+  };
+  const result = validationResult(req).formatWith(errorFormatter);
+  if (!result.isEmpty()) {
+    // Response will contain something like
+    // { errors: [ "body[password]: must be at least 10 chars long" ] }
+    return res.json({ errors: result.array() });
   }
 
   const r = req.body;
