@@ -1,10 +1,11 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import "./App.css";
+import { useState } from "react";
 import { Card } from "./Components/Cards/Card";
 import { Home } from "../src/Pages/Home";
 import { Login } from "../src/Pages/Login";
 import { Register } from "../src/Pages/Register";
 import { CreatePokemon } from "./Components/NewPokemon/CreatePokemon";
+import "./App.css";
 
 function App() {
   return (

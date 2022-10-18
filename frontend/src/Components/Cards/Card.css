@@ -18,9 +18,14 @@ h3 {
   gap: 15px;
 }
 
-.pokeHeader h1 {
+.pokeId {
   color: white;
   z-index: 1;
+}
+
+.pokeId2 {
+  color: white;
+  z-index: -1;
 }
 
 .card {
@@ -254,4 +259,10 @@ progress {
 .movesTitle {
   text-align: center;
   margin: 0px;
+}
+
+/* EDIT BUTTON  */
+
+.editButton {
+  border-radius: 20px solid;
 }
