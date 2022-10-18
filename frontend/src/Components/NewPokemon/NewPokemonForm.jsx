@@ -9,7 +9,6 @@ export const NewPokemonForm = ({
   fetchForm,
   setIsOpen,
   isloading,
-  NewPokeRespondForm,
 }) => {
   const [id, setId] = useState("");
   const [name, setName] = useState("");
@@ -48,7 +47,6 @@ export const NewPokemonForm = ({
             onChange={(e) => setId(e.target.value)}
           ></input>
         </div>
-
         <div className="name">
           <p>Name</p>
           <input
@@ -230,9 +228,6 @@ export const NewPokemonForm = ({
                 primaryColor,
                 secondaryColor
               );
-              // {
-              //   NewPokeRespondForm && setIsOpen(false);
-              // }
             }}
           >
             Save changes & add Pokemon

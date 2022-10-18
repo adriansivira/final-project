@@ -7,7 +7,15 @@ import "./form.css";
 export function CreatePokemon({ setTime }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isloading, setIsLoading] = useState(false);
-  const [NewPokeResponseForm, setNewPokeResponseForm] = useState([]);
+  const [formErrors, setFormErrors] = useState([]);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const fetchForm = (
     id,
@@ -61,30 +69,24 @@ export function CreatePokemon({ setTime }) {
       .then(function (responseJSON) {
         if (responseJSON.success) {
           localStorage.setItem("auth-token", responseJSON.auth_token);
-
-          setTime(Date.now());
         }
         if (responseJSON.errors) {
           setIsLoading(false);
-          setNewPokeResponseForm(responseJSON);
+          setFormErrors(responseJSON.errors);
+          console.log(responseJSON.errors);
+        } else {
+          setTime(Date.now());
+          setTimeout(() => {
+            setIsLoading(false);
+            setIsOpen(false);
+            setFormErrors([]);
+          }, 1000);
         }
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 3000);
-        console.log(responseJSON);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
 
   return (
     <div className="modalBox">
@@ -101,8 +103,14 @@ export function CreatePokemon({ setTime }) {
           fetchForm={fetchForm}
           setIsOpen={setIsOpen}
           isloading={isloading}
-          NewPokeResponseForm={NewPokeResponseForm}
         />
+        {formErrors
+          ? formErrors.map((err) => (
+              <>
+                <li className="msgerror">{err}</li>
+              </>
+            ))
+          : ""}
       </Modal>
     </div>
   );
