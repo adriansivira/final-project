@@ -3,19 +3,21 @@ import { useNavigate, Link } from "react-router-dom";
 import { SpinnerDotted } from "spinners-react";
 import "../App.css";
 
-export function Login() {
+export function Register() {
   const [mail, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState("");
   const [isloading, setisLoading] = useState(false);
   const [errorMsg, seterrorMsg] = useState("");
   const navigate = useNavigate();
 
-  const login = (email, password) => {
+  const register = (nombre, email, password) => {
     let myHeaders = new Headers();
     myHeaders.append("auth-token", "");
     myHeaders.append("Content-Type", "application/json");
 
     const raw = JSON.stringify({
+      nombre: nombre,
       email: email,
       pwd: password,
     });
@@ -28,19 +30,13 @@ export function Login() {
     };
 
     setisLoading(true);
-    fetch("http://localhost:8000/user/login", requestOptions)
+    fetch("http://localhost:8000/user/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if (result.success) {
-          localStorage.setItem("auth-token", result.auth_token);
-          setTimeout(() => {
-            setisLoading(false);
-            navigate("/home");
-          }, 1000);
-        } else {
-          seterrorMsg(result.msg);
+        setTimeout(() => {
           setisLoading(false);
-        }
+          navigate("/");
+        }, 1000);
       })
       .catch((error) => console.log("error", error));
   };
@@ -53,6 +49,17 @@ export function Login() {
       <div className="backgroundLogin">
         <form className="login">
           {errorMsg ? <p>{errorMsg}</p> : ""}
+
+          <div className="nameRegister">
+            <label for="password">Nombre</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Enter your name"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+
           <div className="loginMail">
             <label for="">Email</label>
             <input
@@ -62,6 +69,7 @@ export function Login() {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
           <div className="loginPassword">
             <label for="password">Password</label>
             <input
@@ -71,6 +79,7 @@ export function Login() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
           {isloading ? (
             <div>
               <SpinnerDotted />
@@ -81,18 +90,18 @@ export function Login() {
                 className="loginButton"
                 onClick={(e) => {
                   e.preventDefault();
-                  login(mail, password);
+                  register(name, mail, password);
                   seterrorMsg("");
                 }}
               >
-                Ingresar
+                Registrarse
               </button>
             </div>
           )}
         </form>
-        <div className="goToRegister">
+        <div className="goToLogin">
           <h3>
-            <Link to="/register">¿No tienes usuario?</Link>
+            <Link to="/">¿Ya tienes usuario?</Link>
           </h3>
         </div>
       </div>
