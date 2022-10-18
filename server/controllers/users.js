@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { validationResult } = require("express-validator");
 
 require("dotenv").config();
 
@@ -14,6 +15,43 @@ const knex = require("knex")({
 });
 
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+
+// REGISTER
+
+router.post("/register", (req, res, next) => {
+  const salt = bcrypt.genSaltSync(10);
+  const pwd = bcrypt.hashSync(req.body.pwd, salt);
+
+  // FORMATO DE RETURERROR VALIDATOR EXPRESS
+
+  const errorFormatter = ({ msg, param, value }) => {
+    return `[${param}]: ${msg}`;
+  };
+  const result = validationResult(req).formatWith(errorFormatter);
+  if (!result.isEmpty()) {
+    return res.json({ errors: result.array() });
+  }
+
+  knex("usuarios")
+    .returning(["id", "mail"])
+    .insert({
+      nombre: req.body.nombre,
+      mail: req.body.mail,
+      pwd: pwd,
+    })
+    .then((re) => {
+      res.status(201).json(re[0]);
+      next();
+    })
+    .catch((err) => {
+      res.status(500).send("Error");
+      console.log(err);
+      next();
+    });
+});
+
+// LOGIN
 
 router.post("/login", (req, res, next) => {
   knex
