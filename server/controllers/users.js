@@ -20,9 +20,6 @@ const bcrypt = require("bcrypt");
 // REGISTER
 
 router.post("/register", (req, res, next) => {
-  const salt = bcrypt.genSaltSync(10);
-  const pwd = bcrypt.hashSync(req.body.pwd, salt);
-
   // FORMATO DE RETURERROR VALIDATOR EXPRESS
 
   const errorFormatter = ({ msg, param, value }) => {
@@ -33,11 +30,13 @@ router.post("/register", (req, res, next) => {
     return res.json({ errors: result.array() });
   }
 
+  const salt = bcrypt.genSaltSync(10);
+  const pwd = bcrypt.hashSync(req.body.pwd, salt);
   knex("usuarios")
-    .returning(["id", "mail"])
+    .returning(["id", "email"])
     .insert({
       nombre: req.body.nombre,
-      mail: req.body.mail,
+      email: req.body.email,
       pwd: pwd,
     })
     .then((re) => {
@@ -60,7 +59,7 @@ router.post("/login", (req, res, next) => {
     .where("email", req.body.email)
     .then((rows) => {
       if (rows.length === 1) {
-        if (req.body.pwd == rows[0].pwd) {
+        if (bcrypt.compareSync(req.body.pwd, rows[0].pwd)) {
           res.status(200).json({
             msg: "logueado",
             success: true,
