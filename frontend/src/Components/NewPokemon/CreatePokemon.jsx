@@ -2,11 +2,30 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import { NewPokemonForm } from "./NewPokemonForm";
 import "./form.css";
+import { SpinnerDotted } from "spinners-react";
 
 export function CreatePokemon({ setTime }) {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [isloading, setIsLoading] = useState(false);
   const [formErrors, setFormErrors] = useState([]);
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [img, setImg] = useState("");
+  const [type1, setType1] = useState("");
+  const [type2, setType2] = useState("");
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [move1, setMove1] = useState("");
+  const [move2, setMove2] = useState("");
+  const [description, setDescription] = useState("");
+  const [hp, setHp] = useState("");
+  const [atk, setAtk] = useState("");
+  const [def, setDef] = useState("");
+  const [satk, setSatk] = useState("");
+  const [sdef, setSdef] = useState("");
+  const [spd, setSpd] = useState("");
+  const [primaryColor, setPrimaryColor] = useState("");
+  const [secondaryColor, setSecondaryColor] = useState("");
 
   function openModal() {
     setIsOpen(true);
@@ -102,7 +121,58 @@ export function CreatePokemon({ setTime }) {
           fetchForm={fetchForm}
           setIsOpen={setIsOpen}
           isloading={isloading}
+          setId={setId}
+          setName={setName}
+          setImg={setImg}
+          setType1={setType1}
+          setType2={setType2}
+          setWeight={setWeight}
+          setHeight={setHeight}
+          setMove1={setMove1}
+          setMove2={setMove2}
+          setDescription={setDescription}
+          setHp={setHp}
+          setAtk={setAtk}
+          setDef={setDef}
+          setSatk={setSatk}
+          setSdef={setSdef}
+          setSpd={setSpd}
+          setPrimaryColor={setPrimaryColor}
+          setSecondaryColor={setSecondaryColor}
         />
+        {isloading ? (
+          <div className="spinner">
+            <SpinnerDotted />
+          </div>
+        ) : (
+          <button
+            className="saveButton"
+            onClick={(e) => {
+              fetchForm(
+                id,
+                img,
+                name,
+                type1,
+                type2,
+                weight,
+                height,
+                move1,
+                move2,
+                description,
+                hp,
+                atk,
+                def,
+                satk,
+                sdef,
+                spd,
+                primaryColor,
+                secondaryColor
+              );
+            }}
+          >
+            Save changes & add Pokemon
+          </button>
+        )}
         {formErrors
           ? formErrors.map((err) => (
               <>

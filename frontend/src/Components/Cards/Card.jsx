@@ -9,8 +9,17 @@ import { FaEdit } from "react-icons/fa";
 import "./Card.css";
 
 export const Card = () => {
+  const { nombre } = useParams();
+
+  const navigate = useNavigate();
+  const [datacard, setDatacard] = useState([]);
+  const [isloading, setisLoading] = useState(false);
+
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [formErrors, setFormErrors] = useState([]);
+
   const [id, setId] = useState("");
-  const [name, setName] = useState("");
+  const [name, setName] = useState(nombre);
   const [img, setImg] = useState("");
   const [type1, setType1] = useState("");
   const [type2, setType2] = useState("");
@@ -28,13 +37,7 @@ export const Card = () => {
   const [primaryColor, setPrimaryColor] = useState("");
   const [secondaryColor, setSecondaryColor] = useState("");
 
-  const { nombre } = useParams();
-  const navigate = useNavigate();
-  const [datacard, setDatacard] = useState([]);
-  const [isloading, setisLoading] = useState(false);
-
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [formErrors, setFormErrors] = useState([]);
+  const [changeTime, setchangeTime] = useState(0);
 
   function openEdit() {
     setIsOpen(true);
@@ -44,7 +47,11 @@ export const Card = () => {
     setIsOpen(false);
   }
 
-  // Hacer usestate para capturar los datos desde el fetch
+  // FETCH GET TODOS LOS POKEMONES
+
+  let index;
+
+  let newPokemon;
 
   useEffect(() => {
     setisLoading(true);
@@ -58,6 +65,31 @@ export const Card = () => {
       .then((response) => response.json())
       .then((result) => {
         setDatacard(result);
+
+        result.map((poke, i) => {
+          if (poke.nombre === nombre) {
+            newPokemon = poke;
+            index = i;
+          }
+        });
+        setId(newPokemon.id);
+        setName(nombre);
+        setImg(newPokemon.img);
+        setType1(newPokemon.tipo[0]);
+        setType2(newPokemon.tipo[1]);
+        setWeight(newPokemon.weight);
+        setHeight(newPokemon.heigth);
+        setMove1(newPokemon.moves[0]);
+        setMove2(newPokemon.moves[1]);
+        setDescription(newPokemon.description);
+        setHp(newPokemon.hp);
+        setAtk(newPokemon.atk);
+        setDef(newPokemon.def);
+        setSatk(newPokemon.satk);
+        setSdef(newPokemon.sdef);
+        setSpd(newPokemon.spd);
+        setPrimaryColor(newPokemon.color_primario);
+        setSecondaryColor(newPokemon.color_secundario);
       })
       .catch((error) => console.log("error", error))
       .finally(() => {
@@ -65,11 +97,59 @@ export const Card = () => {
           setisLoading(false);
         }, 1000);
       });
-  }, []);
+  }, [changeTime]);
 
-  let index;
+  // FETCH MODIFICAR POKEMON
 
-  let newPokemon;
+  const fetchEdit = (
+    id,
+    img,
+    nombre,
+    type1,
+    type2,
+    weight,
+    heigth,
+    move1,
+    move2,
+    description,
+    hp,
+    atk,
+    def,
+    satk,
+    sdef,
+    spd,
+    color_primario,
+    color_secundario
+  ) => {
+    fetch("http://localhost:8000/pokemones/" + newPokemon.nombre, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: id,
+        img: img,
+        nombre: nombre,
+        tipo: [type1, type2],
+        weight: weight,
+        heigth: heigth,
+        moves: [move1, move2],
+        description: description,
+        hp: hp,
+        atk: atk,
+        def: def,
+        satk: satk,
+        sdef: sdef,
+        spd: spd,
+        color_primario: color_primario,
+        color_secundario: color_secundario,
+      }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((res) => {
+        return res.json();
+      });
+  };
 
   datacard.map((poke, i) => {
     if (poke.nombre === nombre) {
@@ -77,6 +157,8 @@ export const Card = () => {
       index = i;
     }
   });
+
+  // console.log(newPokemon);
 
   return (
     <>
@@ -109,6 +191,7 @@ export const Card = () => {
           <div className="pokeImgSection">
             {/* LEFT ARROW */}
             <Link
+              onClick={(e) => setchangeTime(Date.now())}
               to={`/card/${
                 datacard[index - 1]
                   ? datacard[index - 1].nombre
@@ -125,6 +208,7 @@ export const Card = () => {
             <img className="pokemonImg" src={newPokemon.img} alt="" />
             {/* RIGTH ARROW */}
             <Link
+              onClick={(e) => setchangeTime(Date.now())}
               to={`/card/${
                 datacard[index + 1]
                   ? datacard[index + 1].nombre
@@ -170,13 +254,80 @@ export const Card = () => {
               </button>
               <Modal isOpen={modalIsOpen} onRequestClose={closeEdit}>
                 <NewPokemonForm
-                  style={{
-                    zIndex: 0,
-                  }}
                   closeModal={closeEdit}
                   setIsOpen={setIsOpen}
                   isloading={isloading}
+                  setId={setId}
+                  id={id}
+                  setName={setName}
+                  name={name}
+                  setImg={setImg}
+                  img={img}
+                  setType1={setType1}
+                  type1={type1}
+                  setType2={setType2}
+                  type2={type2}
+                  setWeight={setWeight}
+                  weight={weight}
+                  setHeight={setHeight}
+                  height={height}
+                  setMove1={setMove1}
+                  move1={move1}
+                  setMove2={setMove2}
+                  move2={move2}
+                  setDescription={setDescription}
+                  description={description}
+                  setHp={setHp}
+                  hp={hp}
+                  setAtk={setAtk}
+                  atk={atk}
+                  setDef={setDef}
+                  def={def}
+                  setSatk={setSatk}
+                  satk={satk}
+                  setSdef={setSdef}
+                  sdef={sdef}
+                  setSpd={setSpd}
+                  spd={spd}
+                  setPrimaryColor={setPrimaryColor}
+                  primaryColor={primaryColor}
+                  setSecondaryColor={setSecondaryColor}
+                  secondaryColor={secondaryColor}
                 />
+                {isloading ? (
+                  <div className="spinner">
+                    <SpinnerDotted />
+                  </div>
+                ) : (
+                  <button
+                    className="saveButton"
+                    onClick={(e) => {
+                      fetchEdit(
+                        id,
+                        img,
+                        name,
+                        type1,
+                        type2,
+                        weight,
+                        height,
+                        move1,
+                        move2,
+                        description,
+                        hp,
+                        atk,
+                        def,
+                        satk,
+                        sdef,
+                        spd,
+                        primaryColor,
+                        secondaryColor
+                      );
+                    }}
+                  >
+                    Save changes & add Pokemon
+                  </button>
+                )}
+
                 {formErrors
                   ? formErrors.map((err) => (
                       <>
