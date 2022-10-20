@@ -1,6 +1,97 @@
+## INDICACIONES PARA INICIAR LA APLICACIÓN:
+
+### Clonar el proyecto
+
+Desde la consola:
+
+```
+cd nombre_carpeta
+git clone - link del repositorio
+
+```
+
+### Para levantar el proyecto es necesario la instalación de:
+
+- Node.js
+
+- Express.js
+
+### Adicionalmente se debe clonar el proyecto desde Github e instalar:
+
+- Visual Studio Code
+- PostgreSQL
+- DBeaver
+- Postman para realizar pruebas de endpoints en backend.
+- Mockoon para realizar pruebas de fetchs en el frontend.
+- Loguearse/Crear cuenta en Github.
+
+### Instalación
+
+### Iniciar frontend y backend:
+
+Ya clonado el proyecto es necesario instalar todas las dependencias tanto en front como back, con el comando:
+
+```
+npm install
+
+```
+
+### Postgres
+
+Se deberán crear 2 bases de datos:
+
+- pokemones
+
+```
+create table pokemones(
+  id varchar primary key,
+  img varchar,
+  nombre varchar,
+  tipo varchar [],
+  weight varchar,
+  heigth varchar,
+  moves varchar [],
+  description varchar,
+  hp varchar,
+  atk varchar,
+  def varchar,
+  satk varchar,
+  sdef varchar,
+  spd varchar,
+  color_primario varchar,
+  color_secundario varchar
+ );
+
+```
+
+- usuarios
+
+```
+create table usuarios(
+  id serial primary key,
+  nombre varchar,
+  email varchar,
+  pwd varchar
+ );
+
+```
+
+### Conexión a la base de datos
+
+Definir en .env las variables:
+
+- POSTGRES_HOST=
+- POSTGRES_USER=""
+- POSTGRES_PORT=""
+- POSTGRES_PASSWORD=""
+- POSTGRES_DATABASE=""
+- JWT_PRIVATE_KEY=""
+
+## ESPECIFICACIONES:
+
 ## ACTORES:
 
-Pokemones -
+Pokemones
 Usuario
 
 ## Entidades

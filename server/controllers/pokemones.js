@@ -86,3 +86,38 @@ exports.newpokemon = (req, res, next) => {
       next();
     });
 };
+
+exports.editPokemon = (req, res, next) => {
+  const nombre = req.params.nombre;
+  const r = req.body;
+  knex
+    .update({
+      id: r.id,
+      img: r.img,
+      nombre: r.nombre,
+      tipo: [r.tipo[0], r.tipo[1]],
+      weight: r.weight,
+      heigth: r.heigth,
+      moves: [r.moves[0], r.moves[1]],
+      description: r.description,
+      hp: r.hp,
+      atk: r.atk,
+      def: r.def,
+      satk: r.satk,
+      sdef: r.sdef,
+      spd: r.spd,
+      color_primario: r.color_primario,
+      color_secundario: r.color_secundario,
+    })
+    .from("pokemonlist")
+    .where("nombre", nombre)
+    .then((re) => {
+      res.status(200).json({ msg: "Pokemon Actualizado" });
+      console.log(re);
+      next();
+    })
+    .catch((err) => {
+      console.log(err);
+      next();
+    });
+};
