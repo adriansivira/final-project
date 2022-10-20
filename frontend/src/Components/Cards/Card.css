@@ -266,3 +266,13 @@ progress {
 .editButton {
   border-radius: 20px solid;
 }
+
+.spinner {
+  grid-area: spinner;
+  margin: 0 auto;
+  padding: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

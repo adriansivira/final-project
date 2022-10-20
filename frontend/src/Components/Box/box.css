@@ -19,7 +19,7 @@ h3 {
 }
 
 .header-box {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   padding: 3px;
   border-radius: 15px 15px 0px 0px;
   width: 96%;

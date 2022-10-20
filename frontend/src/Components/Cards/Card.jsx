@@ -247,6 +247,10 @@ export const Card = () => {
                 style={{
                   backgroundColor: `${newPokemon.color_primario}`,
                   color: `white`,
+                  borderRadius: 20,
+                  border: 0,
+                  height: 27,
+                  width: 200,
                 }}
               >
                 Editar pokemon
@@ -337,7 +341,7 @@ export const Card = () => {
                   : ""}
               </Modal>
             </div>
-            ;{/* ABOUT SECTION */}
+            {/* ABOUT SECTION */}
             <h2
               className="aboutTitle"
               style={{ color: `${newPokemon.color_primario}` }}

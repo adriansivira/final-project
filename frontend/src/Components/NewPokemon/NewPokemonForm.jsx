@@ -43,9 +43,8 @@ export const NewPokemonForm = ({
   setPrimaryColor,
   setSecondaryColor,
 }) => {
-  console.log("el name es:", name);
   return (
-    <>
+    <form>
       <div className="buttonContainer">
         <button className="closeButton" onClick={closeModal}>
           Close
@@ -157,67 +156,79 @@ export const NewPokemonForm = ({
         <div className="hp">
           <p>Hp</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the hp value"
             onChange={(e) => setHp(e.target.value)}
             value={hp}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="atk">
           <p>Atk</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the atk value"
             onChange={(e) => setAtk(e.target.value)}
             value={atk}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="def">
           <p>Def</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the def value"
             onChange={(e) => setDef(e.target.value)}
             value={def}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="satk">
           <p>Satk</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the satk value"
             onChange={(e) => setSatk(e.target.value)}
             value={satk}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="sdef">
           <p>Sdef</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the sdef value"
             onChange={(e) => setSdef(e.target.value)}
             value={sdef}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="spd">
           <p>Spd</p>
           <input
-            type="text"
+            type="number"
             placeholder="Enter the spd value"
             onChange={(e) => setSpd(e.target.value)}
             value={spd}
+            min="000"
+            max="099"
           ></input>
         </div>
 
         <div className="primaryColor">
           <p>Primary Color</p>
           <input
-            type="text"
+            type="color"
             placeholder="Enter the primary color"
             onChange={(e) => setPrimaryColor(e.target.value)}
             value={primaryColor}
@@ -227,13 +238,13 @@ export const NewPokemonForm = ({
         <div className="secondaryColor">
           <p>Secondary Color</p>
           <input
-            type="text"
+            type="color"
             placeholder="Enter the secondary color"
             onChange={(e) => setSecondaryColor(e.target.value)}
             value={secondaryColor}
           ></input>
         </div>
       </div>
-    </>
+    </form>
   );
 };
