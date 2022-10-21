@@ -15,7 +15,7 @@ const knex = require("knex")({
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemonlist")
+    .from("pokemones")
     .then((result) => {
       res.json(result);
       next();
@@ -31,7 +31,7 @@ exports.pokemoncard = (req, res, next) => {
   knex
     // .where("nombre", nombre)
     .select("*")
-    .from("pokemonlist")
+    .from("pokemones")
 
     .then((result) => {
       res.json(result);
@@ -56,7 +56,7 @@ exports.newpokemon = (req, res, next) => {
   }
 
   const r = req.body;
-  knex("pokemonlist")
+  knex("pokemones")
     .returning("*")
     .insert({
       id: r.id,
@@ -109,7 +109,7 @@ exports.editPokemon = (req, res, next) => {
       color_primario: r.color_primario,
       color_secundario: r.color_secundario,
     })
-    .from("pokemonlist")
+    .from("pokemones")
     .where("nombre", nombre)
     .then((re) => {
       res.status(200).json({ msg: "Pokemon Actualizado" });

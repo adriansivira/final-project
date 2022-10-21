@@ -72,7 +72,7 @@ export function Login() {
             />
           </div>
           {isloading ? (
-            <div>
+            <div className="spinnerLogin">
               <SpinnerDotted />
             </div>
           ) : (

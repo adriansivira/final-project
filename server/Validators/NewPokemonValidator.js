@@ -7,7 +7,7 @@ exports.NewPokemonValidator = [
     .withMessage("Campo requerido")
     .isNumeric()
     .withMessage("El valor debe contener solo números")
-    .isLength({ min: 2, max: 4 })
+    .isLength({ min: 2, max: 5 })
     .withMessage("ID inválido. Debe contener entre 3 a 5 números"),
   // body("nombre").exists().notEmpty().withMessage("Campo requerido"),
   // body("img").exists().notEmpty().withMessage("Campo requerido"),

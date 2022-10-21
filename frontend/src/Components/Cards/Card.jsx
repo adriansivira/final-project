@@ -147,6 +147,7 @@ export const Card = () => {
         return response.json();
       })
       .then((res) => {
+        window.location.reload();
         return res.json();
       });
   };
@@ -328,7 +329,7 @@ export const Card = () => {
                       );
                     }}
                   >
-                    Save changes & add Pokemon
+                    Guardar
                   </button>
                 )}
 
@@ -403,6 +404,7 @@ export const Card = () => {
                   value={newPokemon.hp}
                   className={`statProgress ${newPokemon.nombre} `}
                 />
+
                 <ProgressBar
                   text={newPokemon.atk}
                   value={newPokemon.atk}
