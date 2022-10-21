@@ -102,6 +102,11 @@ input::placeholder {
 
 /* LOGIN */
 
+.spinnerLogin {
+  display: flex;
+  justify-content: center;
+}
+
 .backgroundLogin {
   display: flex;
   align-items: center;

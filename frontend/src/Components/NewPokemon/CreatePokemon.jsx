@@ -112,7 +112,7 @@ export function CreatePokemon({ setTime }) {
         className={modalIsOpen ? "newPokemon" : "newpokButton"}
         onClick={openModal}
       >
-        <button>Agregar nuevo Pokemon</button>
+        <button className="addButton">Agregar nuevo Pokemon</button>
       </div>
 
       <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
@@ -170,7 +170,7 @@ export function CreatePokemon({ setTime }) {
               );
             }}
           >
-            Save changes & add Pokemon
+            Guardar cambios
           </button>
         )}
         {formErrors

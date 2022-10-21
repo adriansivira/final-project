@@ -47,11 +47,10 @@ export const NewPokemonForm = ({
     <form>
       <div className="buttonContainer">
         <button className="closeButton" onClick={closeModal}>
-          Close
+          Cerrar
         </button>
       </div>
 
-      <h1 className="modalTitle">Add a new Pokemon</h1>
       <div className="newPokemon">
         <div className="id">
           <p>Id</p>

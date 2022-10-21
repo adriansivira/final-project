@@ -86,6 +86,14 @@
   grid-area: secondaryColor;
 }
 
+.addButton {
+  width: 80%;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 20px;
+  background-color: rgb(177, 164, 164);
+}
+
 .saveButton {
   grid-area: saveButton;
   margin: 0 auto;
