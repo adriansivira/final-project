@@ -159,8 +159,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the hp value"
             onChange={(e) => setHp(e.target.value)}
             value={hp}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 
@@ -171,8 +171,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the atk value"
             onChange={(e) => setAtk(e.target.value)}
             value={atk}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 
@@ -183,8 +183,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the def value"
             onChange={(e) => setDef(e.target.value)}
             value={def}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 
@@ -195,8 +195,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the satk value"
             onChange={(e) => setSatk(e.target.value)}
             value={satk}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 
@@ -207,8 +207,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the sdef value"
             onChange={(e) => setSdef(e.target.value)}
             value={sdef}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 
@@ -219,8 +219,8 @@ export const NewPokemonForm = ({
             placeholder="Enter the spd value"
             onChange={(e) => setSpd(e.target.value)}
             value={spd}
-            min="000"
-            max="099"
+            min="010"
+            max="100"
           ></input>
         </div>
 

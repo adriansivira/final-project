@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ProgressBar } from "./ProgressBar";
+import { ProgressB } from "./ProgressB";
 import Modal from "react-modal";
 import { SpinnerDotted } from "spinners-react";
 import { NewPokemonForm } from "../NewPokemon/NewPokemonForm";
 import { FaEdit } from "react-icons/fa";
+
 import "./Card.css";
 
 export const Card = () => {
@@ -91,7 +92,7 @@ export const Card = () => {
         setPrimaryColor(newPokemon.color_primario);
         setSecondaryColor(newPokemon.color_secundario);
       })
-      .catch((error) => console.log("error", error))
+      .catch((error) => navigate("/404"))
       .finally(() => {
         setTimeout(() => {
           setisLoading(false);
@@ -147,8 +148,15 @@ export const Card = () => {
         return response.json();
       })
       .then((res) => {
-        window.location.reload();
-        return res.json();
+        if (res.errors) {
+          setFormErrors(res.errors);
+        } else {
+          setchangeTime(Date.now());
+          setTimeout(() => {
+            setIsOpen(false);
+            setFormErrors([]);
+          }, 1000);
+        }
       });
   };
 
@@ -158,8 +166,6 @@ export const Card = () => {
       index = i;
     }
   });
-
-  // console.log(newPokemon);
 
   return (
     <>
@@ -399,36 +405,42 @@ export const Card = () => {
                 </span>
               </div>
               <div className="statValue">
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.hp}
                   value={newPokemon.hp}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
 
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.atk}
                   value={newPokemon.atk}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.def}
                   value={newPokemon.def}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.satk}
                   value={newPokemon.satk}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.sdef}
                   value={newPokemon.sdef}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
-                <ProgressBar
+                <ProgressB
                   text={newPokemon.spd}
                   value={newPokemon.spd}
-                  className={`statProgress ${newPokemon.nombre} `}
+                  color={newPokemon.color_primario}
+                  className={`statProgress `}
                 />
               </div>
             </section>

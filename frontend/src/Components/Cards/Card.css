@@ -17,6 +17,9 @@ h3 {
   align-items: center;
   gap: 15px;
 }
+.name_arrow h1 {
+  color: white;
+}
 
 .pokeId {
   color: white;
@@ -133,66 +136,6 @@ span div {
 
 .statName span {
   font-weight: bold;
-}
-
-progress {
-  -webkit-appearance: none;
-}
-
-.Charmander::-webkit-progress-value {
-  background-color: #f57d31;
-}
-.Charmander::-webkit-progress-bar {
-  background-color: #f57c316c;
-}
-
-.Aron::-webkit-progress-value {
-  background-color: #b7b9d0;
-}
-.Aron::-webkit-progress-bar {
-  background-color: #b7b9d05c;
-}
-.Bulbasaur::-webkit-progress-value {
-  background-color: #74cb48;
-}
-.Bulbasaur::-webkit-progress-bar {
-  background-color: #74cb484a;
-}
-.Squirtle::-webkit-progress-value {
-  background-color: #6493eb;
-}
-.Squirtle::-webkit-progress-bar {
-  background-color: #6493eb4b;
-}
-.Ditto::-webkit-progress-value {
-  background-color: #aaa67f;
-}
-.Ditto::-webkit-progress-bar {
-  background-color: #aaa67f51;
-}
-.Butterfree::-webkit-progress-value {
-  background-color: #a7b723;
-}
-.Butterfree::-webkit-progress-bar {
-  background-color: #a8b72345;
-}
-.Gastly::-webkit-progress-value {
-  background-color: #70559b;
-}
-.Gastly::-webkit-progress-bar {
-  background-color: #70559b47;
-}
-.Pikachu::-webkit-progress-value {
-  background-color: #f9cf30;
-}
-.Pikachu::-webkit-progress-bar {
-  background-color: #f9cd3044;
-}
-.Mew::-webkit-progress-value {
-  background-color: #fb5584;
-}
-.Mew::-webkit-progress-bar {
-  background-color: #fb558442;
 }
 
 .about {

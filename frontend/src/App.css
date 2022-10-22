@@ -116,6 +116,7 @@ input::placeholder {
   width: 25%;
   border-radius: 20px;
   height: 70%;
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.527);
 }
 
 .loginPage {

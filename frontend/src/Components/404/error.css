@@ -1,0 +1,31 @@
+.conterror {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("https://culturacolectiva-cultura-colectiva-prod.cdn.arcpublishing.com/resizer/83oUxyA8Md6nj7WOCFkIIkQ6Ojk=/1024x768/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/culturacolectiva/BCOQCB5IXRAANMERWXKHUCHWLY.jpeg");
+}
+
+.errortext {
+  background-color: rgba(0, 0, 0, 0.445);
+}
+
+.botonerr {
+  margin: 20px;
+  font-size: 30px;
+  border-radius: 20px;
+  width: 30%;
+  height: 5%;
+  background-color: rgba(0, 0, 0, 0.445);
+  font-weight: bold;
+}
+
+.botonerr:hover {
+  background-color: white;
+}

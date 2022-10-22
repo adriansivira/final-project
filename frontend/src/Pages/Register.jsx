@@ -44,7 +44,7 @@ export function Register() {
         }
         setisLoading(false);
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => alert("error", error));
   };
 
   return (

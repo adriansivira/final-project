@@ -20,9 +20,7 @@ const bcrypt = require("bcrypt");
 // REGISTER
 
 router.post("/register", (req, res, next) => {
-  // FORMATO DE RETURERROR VALIDATOR EXPRESS
-
-  const errorFormatter = ({ msg, param, value }) => {
+  const errorFormatter = ({ msg, param }) => {
     return `[${param}]: ${msg}`;
   };
   const result = validationResult(req).formatWith(errorFormatter);
@@ -45,7 +43,6 @@ router.post("/register", (req, res, next) => {
     })
     .catch((err) => {
       res.status(500).send("Error");
-      console.log(err);
       next();
     });
 });
