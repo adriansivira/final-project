@@ -33,7 +33,7 @@ app.use(cors(corsOptions));
 app.get("/pokemones", pokeController.todospokemones);
 app.get("/pokemoncard", pokeController.pokemoncard);
 app.post("/pokemones", NewPokemonValidator, pokeController.newpokemon);
-app.put("/pokemones/:nombre", pokeController.editPokemon);
+app.put("/pokemones/:nombre", NewPokemonValidator, pokeController.editPokemon);
 app.use("/user", userRegister, router);
 
 app.listen(8000, () => {

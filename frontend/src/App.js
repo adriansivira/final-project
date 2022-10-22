@@ -6,6 +6,7 @@ import { Login } from "../src/Pages/Login";
 import { Register } from "../src/Pages/Register";
 import { CreatePokemon } from "./Components/NewPokemon/CreatePokemon";
 import "./App.css";
+import { Error } from "./Components/404/Error";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<Home />}></Route>
           <Route path="/createPokemon" element={<CreatePokemon />}></Route>
           <Route path={"/card/:nombre"} element={<Card />}></Route>
+          <Route path="*" element={<Error />}></Route>
         </Routes>
       </div>
     </BrowserRouter>

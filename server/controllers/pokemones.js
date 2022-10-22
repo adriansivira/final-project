@@ -15,7 +15,7 @@ const knex = require("knex")({
 exports.todospokemones = (req, res, next) => {
   knex
     .select("nombre", "id", "img", "color_primario")
-    .from("pokemones")
+    .from("pokemonlist")
     .then((result) => {
       res.json(result);
       next();
@@ -31,7 +31,7 @@ exports.pokemoncard = (req, res, next) => {
   knex
     // .where("nombre", nombre)
     .select("*")
-    .from("pokemones")
+    .from("pokemonlist")
 
     .then((result) => {
       res.json(result);
@@ -44,19 +44,16 @@ exports.pokemoncard = (req, res, next) => {
 };
 
 exports.newpokemon = (req, res, next) => {
-  const errorFormatter = ({ msg, param, value }) => {
-    // Build your resulting errors however you want! String, object, whatever - it works!
-    return `${value}[${param}]: ${msg}`;
+  const errorFormatter = ({ msg, param }) => {
+    return `[${param}]: ${msg}`;
   };
   const result = validationResult(req).formatWith(errorFormatter);
   if (!result.isEmpty()) {
-    // Response will contain something like
-    // { errors: [ "body[password]: must be at least 10 chars long" ] }
     return res.json({ errors: result.array() });
   }
 
   const r = req.body;
-  knex("pokemones")
+  knex("pokemonlist")
     .returning("*")
     .insert({
       id: r.id,
@@ -78,7 +75,6 @@ exports.newpokemon = (req, res, next) => {
     })
     .then((result) => {
       res.status(201).json(result);
-      console.log(result);
       next();
     })
     .catch((err) => {
@@ -88,6 +84,13 @@ exports.newpokemon = (req, res, next) => {
 };
 
 exports.editPokemon = (req, res, next) => {
+  const errorFormatter = ({ msg, param }) => {
+    return `[${param}]: ${msg}`;
+  };
+  const result = validationResult(req).formatWith(errorFormatter);
+  if (!result.isEmpty()) {
+    return res.json({ errors: result.array() });
+  }
   const nombre = req.params.nombre;
   const r = req.body;
   knex
@@ -109,15 +112,14 @@ exports.editPokemon = (req, res, next) => {
       color_primario: r.color_primario,
       color_secundario: r.color_secundario,
     })
-    .from("pokemones")
+    .from("pokemonlist")
     .where("nombre", nombre)
     .then((re) => {
       res.status(200).json({ msg: "Pokemon Actualizado" });
-      console.log(re);
       next();
     })
     .catch((err) => {
-      console.log(err);
+      res.status(400).json({ error: err });
       next();
     });
 };
